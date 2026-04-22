@@ -64,22 +64,22 @@ function Home() {
               <h3 className="founders-words-title">Words from Our Founders</h3>
               <div className="founders-quotes-grid">
                 <div className="founder-quote-card">
-                  <div className="founder-quote-photo">NKK</div>
+                  <img src="founder-kiran.jpg" alt="N. Kiran Kumar" className="founder-quote-photo" />
                   <p className="founder-quote-text">"Instead of just feeling sympathy, the goal was to do something real like medical camps, support drives, and community help."</p>
                   <p className="founder-quote-name">N. Kiran Kumar</p>
                 </div>
                 <div className="founder-quote-card">
-                  <div className="founder-quote-photo">JJ</div>
+                  <img src="founder-jairaj.jpg" alt="J. Jairaj" className="founder-quote-photo" />
                   <p className="founder-quote-text">"Blue Shadows is not just about helping others, but also about building a culture where young people step forward to serve society."</p>
                   <p className="founder-quote-name">J. Jairaj</p>
                 </div>
                 <div className="founder-quote-card">
-                  <div className="founder-quote-photo">KNK</div>
+                  <img src="founder-naveen.jpg" alt="K. Naveen Kumar" className="founder-quote-photo" />
                   <p className="founder-quote-text">"Sometimes people don't just need money or medicine they need hope. This foundation exists to restore that."</p>
                   <p className="founder-quote-name">K. Naveen Kumar</p>
                 </div>
                 <div className="founder-quote-card">
-                  <div className="founder-quote-photo">CS</div>
+                  <img src="founder-siddhartha.jpg" alt="Ch. Siddhartha" className="founder-quote-photo" />
                   <p className="founder-quote-text">"Blue Shadows Foundation was started to bring hope, care, and light into the lives of people living in the shadows."</p>
                   <p className="founder-quote-name">Ch. Siddhartha</p>
                 </div>

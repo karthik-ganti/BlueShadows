@@ -313,13 +313,14 @@ body {
 }
 
 .founder-quote-photo {
-  width: 90px;
-  height: 90px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--accent-blue);
+  object-position: center 20%;
+  border: 4px solid var(--accent-blue);
   margin: 0 auto 20px;
-  box-shadow: 0 3px 10px rgba(30, 58, 95, 0.2);
+  box-shadow: 0 4px 15px rgba(30, 58, 95, 0.25);
 }
 
 .founder-quote-text {
@@ -1219,6 +1220,11 @@ body {
   
   .founder-quote-card {
     padding: 20px;
+  }
+  
+  .founder-quote-photo {
+    width: 120px;
+    height: 120px;
   }
   
   .founder-quote-text {

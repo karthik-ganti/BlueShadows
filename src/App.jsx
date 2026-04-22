@@ -64,7 +64,7 @@ function Home() {
               <h3 className="founders-words-title">Words from Our Founders</h3>
               <div className="founders-quotes-grid">
                 <div className="founder-quote-card">
-                  <img src="founder-kiran.jpg" alt="N. Kiran Kumar" className="founder-quote-photo" />
+                  <img src="founder-naveen.jpg" alt="N. Kiran Kumar" className="founder-quote-photo" />
                   <p className="founder-quote-text">"Instead of just feeling sympathy, the goal was to do something real like medical camps, support drives, and community help."</p>
                   <p className="founder-quote-name">N. Kiran Kumar</p>
                 </div>
@@ -74,7 +74,7 @@ function Home() {
                   <p className="founder-quote-name">J. Jairaj</p>
                 </div>
                 <div className="founder-quote-card">
-                  <img src="founder-naveen.jpg" alt="K. Naveen Kumar" className="founder-quote-photo" />
+                  <img src="founder-kiran.jpg" alt="K. Naveen Kumar" className="founder-quote-photo" />
                   <p className="founder-quote-text">"Sometimes people don't just need money or medicine they need hope. This foundation exists to restore that."</p>
                   <p className="founder-quote-name">K. Naveen Kumar</p>
                 </div>

@@ -2,6 +2,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
 import './index.css'
 import Founders from './pages/Founders'
+import Donate from './pages/Donate'
 
 function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -20,8 +21,9 @@ function Home() {
             <li><a href="#/services" onClick={() => setMenuOpen(false)}>Services</a></li>
             <li><a href="#/gallery" onClick={() => setMenuOpen(false)}>Gallery</a></li>
             <li><a href="#/founders" onClick={() => setMenuOpen(false)}>Founders</a></li>
+            <li><a href="#/donate" onClick={() => setMenuOpen(false)}>Donate</a></li>
           </ul>
-          <a href="#donate" className="donate-btn desktop-donate">Donate Now</a>
+          <a href="#/donate" className="donate-btn desktop-donate">Donate Now</a>
           <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
             <span></span>
             <span></span>
@@ -274,6 +276,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/founders" element={<Founders />} />
+        <Route path="/donate" element={<Donate />} />
       </Routes>
     </Router>
   )

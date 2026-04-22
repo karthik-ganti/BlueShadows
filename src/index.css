@@ -1207,7 +1207,7 @@ body {
   }
   
   .donate-container {
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
   }
   
@@ -1229,7 +1229,7 @@ body {
   .donate-card {
     background: var(--white);
     border-radius: 16px;
-    padding: 30px;
+    padding: 40px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     border: 2px solid var(--accent-blue);
   }
@@ -1243,18 +1243,18 @@ body {
   
   .toggle-btn {
     flex: 1;
-    padding: 14px 16px;
+    padding: 16px 20px;
     border: 2px solid var(--gray-200);
     border-radius: 10px;
     background: var(--white);
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--gray-600);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     transition: all 0.3s;
   }
   
@@ -1331,12 +1331,12 @@ body {
   }
   
   .amount-btn {
-    padding: 16px 10px;
+    padding: 18px 14px;
     border: 2px solid var(--gray-200);
     border-radius: 10px;
     background: var(--white);
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--gray-800);
     transition: all 0.3s;
@@ -1418,12 +1418,12 @@ body {
   /* Next Button */
   .donate-next-btn {
     width: 100%;
-    padding: 18px;
+    padding: 20px;
     background: var(--primary-blue);
     color: var(--white);
     border: none;
     border-radius: 10px;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s;
@@ -1532,12 +1532,12 @@ body {
   }
 
   .donate-card {
-    padding: 20px;
+    padding: 24px;
   }
 
   .toggle-btn {
-    font-size: 0.85rem;
-    padding: 12px 8px;
+    font-size: 0.9rem;
+    padding: 14px 10px;
   }
 
   .amount-grid {

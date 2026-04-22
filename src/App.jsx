@@ -59,6 +59,33 @@ function Home() {
               Blue Shadows Foundation is a non-profit organization committed to serving society through healthcare support, educational assistance for the poor, awareness programs, and community development initiatives.
             </p>
             
+            {/* Founders' Words */}
+            <div className="founders-words-section">
+              <h3 className="founders-words-title">Words from Our Founders</h3>
+              <div className="founders-quotes-grid">
+                <div className="founder-quote-card">
+                  <div className="founder-quote-photo">NKK</div>
+                  <p className="founder-quote-text">"Instead of just feeling sympathy, the goal was to do something real like medical camps, support drives, and community help."</p>
+                  <p className="founder-quote-name">N. Kiran Kumar</p>
+                </div>
+                <div className="founder-quote-card">
+                  <div className="founder-quote-photo">JJ</div>
+                  <p className="founder-quote-text">"Blue Shadows is not just about helping others, but also about building a culture where young people step forward to serve society."</p>
+                  <p className="founder-quote-name">J. Jairaj</p>
+                </div>
+                <div className="founder-quote-card">
+                  <div className="founder-quote-photo">KNK</div>
+                  <p className="founder-quote-text">"Sometimes people don't just need money or medicine they need hope. This foundation exists to restore that."</p>
+                  <p className="founder-quote-name">K. Naveen Kumar</p>
+                </div>
+                <div className="founder-quote-card">
+                  <div className="founder-quote-photo">CS</div>
+                  <p className="founder-quote-text">"Blue Shadows Foundation was started to bring hope, care, and light into the lives of people living in the shadows."</p>
+                  <p className="founder-quote-name">Ch. Siddhartha</p>
+                </div>
+              </div>
+            </div>
+            
             {/* Founder Highlight */}
             <div className="founder-highlight">
               <p className="founder-label">With the Support of</p>

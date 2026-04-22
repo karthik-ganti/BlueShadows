@@ -276,6 +276,72 @@ body {
   line-height: 1.8;
 }
 
+/* Founders' Words Section */
+.founders-words-section {
+  margin-bottom: 50px;
+}
+
+.founders-words-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  color: var(--primary-blue);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.founders-quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.founder-quote-card {
+  background: var(--white);
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  border-top: 4px solid var(--accent-blue);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.founder-quote-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.founder-quote-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 auto 20px;
+}
+
+.founder-quote-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--gray-600);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.founder-quote-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
 /* Founder Highlight */
 .founder-highlight {
   text-align: center;
@@ -1143,6 +1209,24 @@ body {
   /* Founders Page */
   .founders-hero {
     padding: 70px 15px 50px;
+  }
+  
+  .founders-words-title {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+  }
+  
+  .founders-quotes-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .founder-quote-card {
+    padding: 20px;
+  }
+  
+  .founder-quote-text {
+    font-size: 0.9rem;
   }
   
   .founders-hero h1 {

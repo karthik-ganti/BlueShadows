@@ -1631,16 +1631,16 @@ body {
 }
 
 .qr-code-display.show {
-  max-height: 600px;
+  max-height: 800px;
   opacity: 1;
   margin-top: 20px;
 }
 
 .qr-card {
   background: var(--white);
-  border: 2px solid var(--accent-blue);
-  border-radius: 12px;
-  padding: 25px;
+  border: 3px solid var(--accent-blue);
+  border-radius: 16px;
+  padding: 35px;
   text-align: center;
 }
 
@@ -1652,23 +1652,25 @@ body {
 }
 
 .qr-upi-id {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--gray-600);
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .qr-upi-id strong {
   color: var(--primary-blue);
   font-family: monospace;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
 }
 
 .qr-image {
-  max-width: 280px;
+  max-width: 400px;
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .qr-note {

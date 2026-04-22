@@ -6,17 +6,17 @@ function Founders() {
       {/* Navigation */}
       <nav className="navbar">
         <div className="nav-container">
-          <a href="/" className="logo">
+          <a href="#/" className="logo">
             <img src="/logo.jpg" alt="Blue Shadows Logo" />
           </a>
           <ul className="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/#about">About</a></li>
-            <li><a href="/#services">Services</a></li>
-            <li><a href="/#gallery">Gallery</a></li>
-            <li><a href="/founders">Founders</a></li>
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/about">About</a></li>
+            <li><a href="#/services">Services</a></li>
+            <li><a href="#/gallery">Gallery</a></li>
+            <li><a href="#/founders">Founders</a></li>
           </ul>
-          <a href="/" className="donate-btn">Donate Now</a>
+          <a href="#/" className="donate-btn">Donate Now</a>
         </div>
       </nav>
 
@@ -54,8 +54,8 @@ function Founders() {
           <div className="footer-section">
             <h4>Quick Links</h4>
             <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/founders">Founders</a></li>
+              <li><a href="#/">Home</a></li>
+              <li><a href="#/founders">Founders</a></li>
             </ul>
           </div>
           <div className="footer-section">

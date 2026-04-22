@@ -1,16 +1,72 @@
-# React + Vite
+# Blue Shadows Foundation Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive website for **Blue Shadows Foundation** - a non-profit organization dedicated to serving society through healthcare support, educational assistance for the poor, awareness programs, and community development initiatives.
 
-Currently, two official plugins are available:
+![Blue Shadows Logo](./public/logo.jpg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## About Blue Shadows Foundation
 
-## React Compiler
+> "Bringing light to those living in the shadows."
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Blue Shadows Foundation is a non-profit organization committed to improving lives through:
+- Free Medical Camps
+- Health Awareness Programs
+- Education Support for Underprivileged Children
+- Rural Support
+- Emergency Help Initiatives
+- Youth Awareness Programs
 
-## Expanding the ESLint configuration
+**Registration No:** 261/2025
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**The Backbone of Our Mission:** Pamula Prakash Deep - A young entrepreneur whose vision and dedication drive our commitment to create positive change in society.
+
+## Website Features
+
+- **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
+- **Animated Logo** - Floating and glowing animation on homepage
+- **Multi-page Navigation** - Home page and dedicated Founders page
+- **Video Integration** - YouTube Shorts embedded in Impact Stories section
+- **Photo Gallery** - Real photos from community activities
+- **Elegant Typography** - Playfair Display + Inter font combination
+- **Blue & White Theme** - Professional NGO color scheme
+
+## Website Sections
+
+| Section | Description |
+|---------|-------------|
+| **Homepage** | Hero section with animated logo and mission statement |
+| **About Us** | Organization info, founder highlight, vision & mission |
+| **Services** | 6 service cards showcasing our programs |
+| **Gallery** | Photo gallery from medical camps and community support |
+| **Impact Stories** | YouTube Shorts videos showcasing our work |
+| **Founders** | Dedicated page with founders' photo and names |
+
+## Tech Stack
+
+- **React 18** - Frontend framework
+- **Vite** - Build tool
+- **React Router** - Multi-page navigation
+- **CSS3** - Custom styling with animations
+- **GitHub Pages** - Free hosting & deployment
+
+## Contact Information
+
+- **Email:** blueshadowsfoundation@gmail.com
+- **Phone:** 78283 23456
+- **Location:** Razole, Malikipuram, Amalapuram
+- **Instagram:** [@bluee_shadowss](https://www.instagram.com/bluee_shadowss)
+
+## Founders
+
+- N. Kiran Kumar
+- J. Jairaj
+- K. Naveen Kumar
+- Ch. Siddhartha
+
+## Live Website
+
+Visit the live website at: [GitHub Pages URL](https://karthik-ganti.github.io/BlueShadows)
+
+---
+
+&copy; 2025 Blue Shadows Foundation. All rights reserved.

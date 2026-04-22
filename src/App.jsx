@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import './index.css'
 import Founders from './pages/Founders'
 
@@ -12,11 +12,11 @@ function Home() {
             <img src="/logo.jpg" alt="Blue Shadows Logo" />
           </a>
           <ul className="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="/founders">Founders</a></li>
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/about">About</a></li>
+            <li><a href="#/services">Services</a></li>
+            <li><a href="#/gallery">Gallery</a></li>
+            <li><a href="#/founders">Founders</a></li>
           </ul>
           <a href="#donate" className="donate-btn">Donate Now</a>
         </div>
@@ -197,9 +197,9 @@ function Home() {
           <div className="footer-section">
             <h4>Quick Links</h4>
             <ul>
-              <li><a href="/founders">Founders</a></li>
-              <li><a href="#services">Our Services</a></li>
-              <li><a href="#donate">Donate</a></li>
+              <li><a href="#/founders">Founders</a></li>
+              <li><a href="#/services">Our Services</a></li>
+              <li><a href="#/donate">Donate</a></li>
             </ul>
           </div>
           <div className="footer-section">

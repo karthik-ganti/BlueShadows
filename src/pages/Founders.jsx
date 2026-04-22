@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import '../index.css'
 
 function Founders() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <div className="founders-page">
       {/* Navigation */}
@@ -9,14 +12,19 @@ function Founders() {
           <a href="#/" className="logo">
             <img src="/logo.jpg" alt="Blue Shadows Logo" />
           </a>
-          <ul className="nav-links">
-            <li><a href="#/">Home</a></li>
-            <li><a href="#/about">About</a></li>
-            <li><a href="#/services">Services</a></li>
-            <li><a href="#/gallery">Gallery</a></li>
-            <li><a href="#/founders">Founders</a></li>
+          <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
+            <li><a href="#/" onClick={() => setMenuOpen(false)}>Home</a></li>
+            <li><a href="#/about" onClick={() => setMenuOpen(false)}>About</a></li>
+            <li><a href="#/services" onClick={() => setMenuOpen(false)}>Services</a></li>
+            <li><a href="#/gallery" onClick={() => setMenuOpen(false)}>Gallery</a></li>
+            <li><a href="#/founders" onClick={() => setMenuOpen(false)}>Founders</a></li>
           </ul>
-          <a href="#/" className="donate-btn">Donate Now</a>
+          <a href="#/" className="donate-btn desktop-donate">Donate Now</a>
+          <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </nav>
 

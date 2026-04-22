@@ -1285,19 +1285,21 @@ body {
   }
   
   .founders-names-inline {
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
     padding: 20px;
     border-radius: 15px;
     margin-top: 25px;
+    justify-content: center;
   }
   
   .founder-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   
   .separator {
-    display: none;
+    display: inline;
   }
 }
 

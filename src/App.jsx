@@ -7,6 +7,16 @@ import Donate from './pages/Donate'
 function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
 
+  const scrollToSection = (sectionId) => {
+    setMenuOpen(false)
+    setTimeout(() => {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 100)
+  }
+
   return (
     <div className="app">
       {/* Navigation */}
@@ -17,9 +27,9 @@ function Home() {
           </a>
           <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
             <li><a href="#/" onClick={() => setMenuOpen(false)}>Home</a></li>
-            <li><a href="#/about" onClick={() => setMenuOpen(false)}>About</a></li>
-            <li><a href="#/services" onClick={() => setMenuOpen(false)}>Services</a></li>
-            <li><a href="#/gallery" onClick={() => setMenuOpen(false)}>Gallery</a></li>
+            <li><a href="#/" onClick={() => scrollToSection('about')}>About</a></li>
+            <li><a href="#/" onClick={() => scrollToSection('services')}>Services</a></li>
+            <li><a href="#/" onClick={() => scrollToSection('gallery')}>Gallery</a></li>
             <li><a href="#/founders" onClick={() => setMenuOpen(false)}>Founders</a></li>
             <li><a href="#/donate" onClick={() => setMenuOpen(false)}>Donate</a></li>
           </ul>

@@ -12,7 +12,7 @@ function Home() {
       <nav className="navbar">
         <div className="nav-container">
           <a href="#/" className="logo">
-            <img src="/logo.jpg" alt="Blue Shadows Logo" />
+            <img src="logo.jpg" alt="Blue Shadows Logo" />
           </a>
           <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
             <li><a href="#/" onClick={() => setMenuOpen(false)}>Home</a></li>
@@ -43,7 +43,7 @@ function Home() {
           </div>
           <div className="hero-logo-animation">
             <div className="logo-animation-container">
-              <img src="/logo.jpg" alt="Blue Shadows Logo" className="animated-logo" />
+              <img src="logo.jpg" alt="Blue Shadows Logo" className="animated-logo" />
               <div className="logo-glow"></div>
             </div>
           </div>
@@ -172,22 +172,22 @@ function Home() {
           <p className="gallery-intro">Take a glimpse of our journey and the lives we've touched through our initiatives.</p>
           <div className="gallery-grid">
             <div className="gallery-item">
-              <img src="/medical-camp.jpg" alt="Free Medical Camp at Lakkavaram" />
+              <img src="medical-camp.jpg" alt="Free Medical Camp at Lakkavaram" />
             </div>
             <div className="gallery-item">
-              <img src="/community-support.jpg" alt="Community Support at Razole, Malikipuram, Amalapuram" />
+              <img src="community-support.jpg" alt="Community Support at Razole, Malikipuram, Amalapuram" />
             </div>
             <div className="gallery-item">
-              <img src="/children-celebration.jpg" alt="Children Celebration at Razole, Malikipuram, Amalapuram" />
+              <img src="children-celebration.jpg" alt="Children Celebration at Razole, Malikipuram, Amalapuram" />
             </div>
             <div className="gallery-item">
-              <img src="/rural-support.jpg" alt="Rural Support at Razole, Malikipuram, Amalapuram" />
+              <img src="rural-support.jpg" alt="Rural Support at Razole, Malikipuram, Amalapuram" />
             </div>
             <div className="gallery-item">
-              <img src="/food-distribution.jpg" alt="Food Distribution at Razole, Malikipuram, Amalapuram" />
+              <img src="food-distribution.jpg" alt="Food Distribution at Razole, Malikipuram, Amalapuram" />
             </div>
             <div className="gallery-item">
-              <img src="/clothes-distribution.jpg" alt="Clothes Distribution at Razole, Malikipuram, Amalapuram" />
+              <img src="clothes-distribution.jpg" alt="Clothes Distribution at Razole, Malikipuram, Amalapuram" />
             </div>
           </div>
         </div>
@@ -198,7 +198,7 @@ function Home() {
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-logo">
-              <img src="/logo.jpg" alt="Blue Shadows Logo" />
+              <img src="logo.jpg" alt="Blue Shadows Logo" />
             </div>
             <p className="tagline">"Bringing light to those living in the shadows."</p>
           </div>

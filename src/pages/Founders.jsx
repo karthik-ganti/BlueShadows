@@ -10,7 +10,7 @@ function Founders() {
       <nav className="navbar">
         <div className="nav-container">
           <a href="#/" className="logo">
-            <img src="/logo.jpg" alt="Blue Shadows Logo" />
+            <img src="logo.jpg" alt="Blue Shadows Logo" />
           </a>
           <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
             <li><a href="#/" onClick={() => setMenuOpen(false)}>Home</a></li>
@@ -35,14 +35,14 @@ function Founders() {
           
           <div className="founders-photo-section">
             <div className="founders-group-photo">
-              <img src="/founders.jpg" alt="Founders of Blue Shadows" />
+              <img src="founders.jpg" alt="Founders of Blue Shadows" />
             </div>
             <div className="founders-names-inline">
-              <span className="founder-name">N. Kiran Kumar</span>
+              <span className="founder-name">K. Naveen Kumar</span>
               <span className="separator">|</span>
               <span className="founder-name">J. Jairaj</span>
               <span className="separator">|</span>
-              <span className="founder-name">K. Naveen Kumar</span>
+              <span className="founder-name">N. Kiran Kumar</span>
               <span className="separator">|</span>
               <span className="founder-name">Ch. Siddhartha</span>
             </div>
@@ -55,7 +55,7 @@ function Founders() {
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-logo">
-              <img src="/logo.jpg" alt="Blue Shadows Logo" />
+              <img src="logo.jpg" alt="Blue Shadows Logo" />
             </div>
             <p className="tagline">"Bringing light to those living in the shadows."</p>
           </div>

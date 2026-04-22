@@ -8,6 +8,7 @@ function Donate() {
   const [amount, setAmount] = useState('')
   const [selectedAmount, setSelectedAmount] = useState(null)
   const [cause, setCause] = useState('')
+  const [showQR, setShowQR] = useState(false)
 
   const presetAmounts = ['₹500', '₹1000', '₹2000', '₹5000', '₹10000', '₹20000']
   const causes = [
@@ -156,6 +157,27 @@ function Donate() {
             >
               Next
             </button>
+
+            {/* Pay with QR */}
+            <div className="qr-payment-section">
+              <div className="qr-divider">
+                <span>OR</span>
+              </div>
+              <button
+                className="qr-toggle-btn"
+                onClick={() => setShowQR(!showQR)}
+              >
+                <span className="qr-icon">📱</span> Pay with QR Code
+              </button>
+              <div className={`qr-code-display ${showQR ? 'show' : ''}`}>
+                <div className="qr-card">
+                  <h3>Scan & Pay</h3>
+                  <p className="qr-upi-id">UPI ID: <strong>82537301@ubin</strong></p>
+                  <img src="qr-code.jpg" alt="Blue Shadows Foundation QR Code" className="qr-image" />
+                  <p className="qr-note">Scan this QR code using any UPI app (Google Pay, PhonePe, Paytm, BHIM)</p>
+                </div>
+              </div>
+            </div>
 
             {/* Tax Info */}
             {citizenType === 'indian' && (

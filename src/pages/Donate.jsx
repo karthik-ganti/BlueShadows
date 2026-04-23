@@ -20,6 +20,7 @@ function Donate() {
   const [donorPhone, setDonorPhone] = useState('')
   const [isMobile, setIsMobile] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [upiCopied, setUpiCopied] = useState(false)
 
   const presetAmounts = ['500', '1000', '2000', '5000', '10000', '20000']
   const causes = [
@@ -98,6 +99,24 @@ function Donate() {
 
   const handlePaymentDone = () => {
     setStep(4)
+  }
+
+  const copyUpiId = async () => {
+    try {
+      await navigator.clipboard.writeText(UPI_ID)
+      setUpiCopied(true)
+      setTimeout(() => setUpiCopied(false), 2000)
+    } catch {
+      // Fallback for mobile browsers
+      const textArea = document.createElement('textarea')
+      textArea.value = UPI_ID
+      document.body.appendChild(textArea)
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+      setUpiCopied(true)
+      setTimeout(() => setUpiCopied(false), 2000)
+    }
   }
 
   const handleDonateAgain = () => {
@@ -336,49 +355,45 @@ function Donate() {
                 <div className="payment-purpose">{cause}</div>
               </div>
 
-              {isMobile ? (
-                /* Mobile — UPI Deep Link */
-                <div className="mobile-payment">
-                  <div className="upi-icon-row">
-                    <span className="upi-app-icon">📱</span>
+              <div className="desktop-payment">
+                <h3 className="payment-title">Scan & Pay</h3>
+                <p className="payment-desc">
+                  {isMobile
+                    ? 'Take a screenshot of this QR code and scan it in your UPI app, or copy the UPI ID below to pay manually.'
+                    : 'Scan this QR code using any UPI app on your phone to complete the payment.'
+                  }
+                </p>
+                <div className="qr-container">
+                  <div className="qr-wrapper">
+                    <QRCodeSVG
+                      value={upiUri}
+                      size={isMobile ? 180 : 220}
+                      level="H"
+                      includeMargin={true}
+                      bgColor="#ffffff"
+                      fgColor="#1e3a5f"
+                    />
                   </div>
-                  <h3 className="payment-title">Pay via UPI App</h3>
-                  <p className="payment-desc">Tap the button below to open your preferred UPI app and complete the payment.</p>
-                  <a
-                    href={upiUri}
-                    className="upi-pay-btn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Pay ₹{Number(amount).toLocaleString('en-IN')} via UPI
-                  </a>
-                  <div className="upi-apps-hint">
-                    <span>Works with</span>
-                    <div className="app-names">Google Pay • PhonePe • Paytm • BHIM</div>
-                  </div>
-                </div>
-              ) : (
-                /* Desktop — QR Code */
-                <div className="desktop-payment">
-                  <h3 className="payment-title">Scan & Pay</h3>
-                  <p className="payment-desc">Scan this QR code using any UPI app on your phone to complete the payment.</p>
-                  <div className="qr-container">
-                    <div className="qr-wrapper">
-                      <QRCodeSVG
-                        value={upiUri}
-                        size={220}
-                        level="H"
-                        includeMargin={true}
-                        bgColor="#ffffff"
-                        fgColor="#1e3a5f"
-                      />
-                    </div>
+                  <div className="upi-id-row">
                     <p className="qr-upi-id">UPI ID: <strong>{UPI_ID}</strong></p>
+                    <button className="copy-upi-btn" onClick={copyUpiId}>
+                      {upiCopied ? '✓ Copied!' : '📋 Copy'}
+                    </button>
                   </div>
-                  <div className="upi-apps-hint">
-                    <span>Scan with</span>
-                    <div className="app-names">Google Pay • PhonePe • Paytm • BHIM</div>
-                  </div>
+                  <p className="payment-amount-note">Amount: ₹{Number(amount).toLocaleString('en-IN')}</p>
+                </div>
+                <div className="upi-apps-hint">
+                  <span>Pay using</span>
+                  <div className="app-names">Google Pay • PhonePe • Paytm • BHIM</div>
+                </div>
+              </div>
+
+              {isMobile && (
+                <div className="mobile-fallback">
+                  <div className="qr-divider"><span>OR</span></div>
+                  <a href={upiUri} className="upi-try-btn">
+                    Try Opening UPI App →
+                  </a>
                 </div>
               )}
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { QRCodeSVG } from 'qrcode.react'
 
 // Google Apps Script URL — replace with your deployed web app URL
-const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyTk0DIAD9NTE9H2FHGc907Cx7-wJO386czvjDEEzRveQz2TdItgy7jkqU_EuRmC9SBCg/exec'
 
 const UPI_ID = '82537301@ubin'
 const PAYEE_NAME = 'Blue Shadows Foundation'
@@ -34,7 +34,7 @@ function Donate() {
   useEffect(() => {
     const checkMobile = () => {
       const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-        || navigator.maxTouchPoints > 1
+        && window.innerWidth <= 768
       setIsMobile(mobile)
     }
     checkMobile()
@@ -70,22 +70,26 @@ function Donate() {
 
     // Send donor data to Google Sheets
     try {
+      const payload = JSON.stringify({
+        country: citizenType === 'indian' ? 'India' : 'Foreign',
+        amount: amount,
+        purpose: cause,
+        name: donorName,
+        phone: donorPhone,
+        frequency: frequency,
+        timestamp: new Date().toISOString()
+      })
+
+      // Use text/plain to avoid CORS preflight — Google Apps Script
+      // will still receive the JSON string in e.postData.contents
       await fetch(GOOGLE_SHEET_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          country: citizenType === 'indian' ? 'India' : 'Foreign',
-          amount: amount,
-          purpose: cause,
-          name: donorName,
-          phone: donorPhone,
-          frequency: frequency,
-          timestamp: new Date().toISOString()
-        })
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: payload
       })
     } catch (err) {
-      console.log('Sheet submission error (may work with no-cors):', err)
+      console.log('Sheet submission error:', err)
     }
 
     setSubmitting(false)

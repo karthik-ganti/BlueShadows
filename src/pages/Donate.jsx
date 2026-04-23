@@ -57,7 +57,7 @@ function Donate() {
     setSelectedAmount(null)
   }
 
-  const upiUri = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amount}&cu=INR&tn=${encodeURIComponent('Donation for ' + (cause || 'General Support'))}`
+  const upiUri = `upi://pay?pa=${UPI_ID}&pn=BlueShadowsFoundation&am=${amount}&cu=INR&mode=00&tn=Donation`
 
   const handleGoToInfo = () => {
     if (!amount || !cause) return

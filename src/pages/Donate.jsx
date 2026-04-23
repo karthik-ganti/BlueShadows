@@ -1,16 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { QRCodeSVG } from 'qrcode.react'
+
+// Google Apps Script URL — replace with your deployed web app URL
+const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'
+
+const UPI_ID = '82537301@ubin'
+const PAYEE_NAME = 'Blue Shadows Foundation'
 
 function Donate() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [step, setStep] = useState(1)
   const [citizenType, setCitizenType] = useState('indian')
   const [frequency, setFrequency] = useState('onetime')
   const [amount, setAmount] = useState('')
   const [selectedAmount, setSelectedAmount] = useState(null)
   const [cause, setCause] = useState('')
-  const [showQR, setShowQR] = useState(false)
+  const [donorName, setDonorName] = useState('')
+  const [donorPhone, setDonorPhone] = useState('')
+  const [isMobile, setIsMobile] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
-  const presetAmounts = ['₹500', '₹1000', '₹2000', '₹5000', '₹10000', '₹20000']
+  const presetAmounts = ['500', '1000', '2000', '5000', '10000', '20000']
   const causes = [
     'Medical Camps',
     'Education Support',
@@ -20,9 +31,25 @@ function Donate() {
     'Youth Awareness Programs'
   ]
 
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        || navigator.maxTouchPoints > 1
+      setIsMobile(mobile)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Scroll to top when step changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [step])
+
   const handleAmountSelect = (amt) => {
     setSelectedAmount(amt)
-    setAmount(amt.replace('₹', ''))
+    setAmount(amt)
   }
 
   const handleCustomAmount = (e) => {
@@ -30,9 +57,57 @@ function Donate() {
     setSelectedAmount(null)
   }
 
-  const handleNext = () => {
-    alert(`Thank you for your interest in donating ₹${amount} (${frequency === 'onetime' ? 'One Time' : 'Monthly'}) for ${cause || 'General Support'}!\n\nThis is a demo form. Actual payment integration will be added soon.`)
+  const upiUri = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amount}&cu=INR&tn=${encodeURIComponent('Donation for ' + (cause || 'General Support'))}`
+
+  const handleGoToInfo = () => {
+    if (!amount || !cause) return
+    setStep(2)
   }
+
+  const handleProceedToPay = async () => {
+    if (!donorName || !donorPhone) return
+    setSubmitting(true)
+
+    // Send donor data to Google Sheets
+    try {
+      await fetch(GOOGLE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          country: citizenType === 'indian' ? 'India' : 'Foreign',
+          amount: amount,
+          purpose: cause,
+          name: donorName,
+          phone: donorPhone,
+          frequency: frequency,
+          timestamp: new Date().toISOString()
+        })
+      })
+    } catch (err) {
+      console.log('Sheet submission error (may work with no-cors):', err)
+    }
+
+    setSubmitting(false)
+    setStep(3)
+  }
+
+  const handlePaymentDone = () => {
+    setStep(4)
+  }
+
+  const handleDonateAgain = () => {
+    setStep(1)
+    setAmount('')
+    setSelectedAmount(null)
+    setCause('')
+    setDonorName('')
+    setDonorPhone('')
+    setCitizenType('indian')
+    setFrequency('onetime')
+  }
+
+  const stepLabels = ['Choose', 'Your Info', 'Payment', 'Thank You']
 
   return (
     <div className="app">
@@ -59,134 +134,292 @@ function Donate() {
         </div>
       </nav>
 
-      {/* Donation Form */}
+      {/* Donation Section */}
       <section className="donate-section">
         <div className="donate-container">
           <h1 className="donate-title">Make a Difference Today</h1>
           <p className="donate-subtitle">Your contribution brings hope and light to those living in the shadows.</p>
 
-          <div className="donate-card">
-            {/* Citizen Type Toggle */}
-            <div className="toggle-group citizen-toggle">
-              <button
-                className={`toggle-btn ${citizenType === 'indian' ? 'active' : ''}`}
-                onClick={() => setCitizenType('indian')}
-              >
-                <span className="toggle-check">{citizenType === 'indian' ? '✓' : '○'}</span>
-                Indian Citizens
-              </button>
-              <button
-                className={`toggle-btn ${citizenType === 'foreign' ? 'active' : ''}`}
-                onClick={() => setCitizenType('foreign')}
-              >
-                <span className="toggle-check">{citizenType === 'foreign' ? '✓' : '○'}</span>
-                Foreign Citizens/OCI
-              </button>
-            </div>
-
-            {/* Info Banner */}
-            <div className="info-banner">
-              <span className="info-icon">ⓘ</span>
-              <span>For {citizenType === 'indian' ? 'Indian' : 'Foreign'} Passport holders</span>
-            </div>
-
-            {/* Frequency Toggle */}
-            <div className="toggle-group frequency-toggle">
-              <button
-                className={`freq-btn ${frequency === 'onetime' ? 'active' : ''}`}
-                onClick={() => setFrequency('onetime')}
-              >
-                <span className="heart-icon">♥</span> One Time
-              </button>
-              <button
-                className={`freq-btn ${frequency === 'monthly' ? 'active' : ''}`}
-                onClick={() => setFrequency('monthly')}
-              >
-                <span className="heart-icon">♥</span> Monthly
-              </button>
-            </div>
-
-            {/* Preset Amounts */}
-            <div className="amount-grid">
-              {presetAmounts.map((amt) => (
-                <button
-                  key={amt}
-                  className={`amount-btn ${selectedAmount === amt ? 'selected' : ''}`}
-                  onClick={() => handleAmountSelect(amt)}
-                >
-                  {amt}
-                </button>
-              ))}
-            </div>
-
-            {/* Custom Amount */}
-            <div className="custom-amount">
-              <label className="custom-label">Enter Your Own Amount <span className="required">*</span></label>
-              <div className="custom-input-wrapper">
-                <span className="currency">₹</span>
-                <input
-                  type="number"
-                  value={amount}
-                  onChange={handleCustomAmount}
-                  placeholder="Enter amount"
-                  className="custom-input"
-                />
+          {/* Step Progress Bar */}
+          <div className="step-progress">
+            {stepLabels.map((label, i) => (
+              <div key={label} className={`step-item ${step >= i + 1 ? 'active' : ''} ${step > i + 1 ? 'completed' : ''}`}>
+                <div className="step-circle">
+                  {step > i + 1 ? (
+                    <svg viewBox="0 0 24 24" className="step-check-icon"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor" /></svg>
+                  ) : (
+                    <span>{i + 1}</span>
+                  )}
+                </div>
+                <span className="step-label">{label}</span>
+                {i < stepLabels.length - 1 && <div className="step-line" />}
               </div>
-            </div>
+            ))}
+          </div>
 
-            {/* Cause Selection */}
-            <div className="cause-select">
-              <label className="custom-label">I Pledge My Support For <span className="required">*</span></label>
-              <select
-                value={cause}
-                onChange={(e) => setCause(e.target.value)}
-                className="cause-dropdown"
-              >
-                <option value="">Select a cause</option>
-                {causes.map((c) => (
-                  <option key={c} value={c}>{c}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Next Button */}
-            <button
-              className="donate-next-btn"
-              onClick={handleNext}
-              disabled={!amount || !cause}
-            >
-              Next
-            </button>
-
-            {/* Pay with QR */}
-            <div className="qr-payment-section">
-              <div className="qr-divider">
-                <span>OR</span>
-              </div>
-              <button
-                className="qr-toggle-btn"
-                onClick={() => setShowQR(!showQR)}
-              >
-                <span className="qr-icon">📱</span> Pay with QR Code
-              </button>
-              <div className={`qr-code-display ${showQR ? 'show' : ''}`}>
-                <div className="qr-card">
-                  <h3>Scan & Pay</h3>
-                  <p className="qr-upi-id">UPI ID: <strong>82537301@ubin</strong></p>
-                  <img src="qr-code.jpg" alt="Blue Shadows Foundation QR Code" className="qr-image" />
-                  <p className="qr-note">Scan this QR code using any UPI app (Google Pay, PhonePe, Paytm, BHIM)</p>
+          {/* ===== STEP 1: Choose ===== */}
+          {step === 1 && (
+            <div className="donate-card step-content fade-in-up">
+              {/* Citizen Type Toggle */}
+              <div className="form-group">
+                <label className="form-label">I am a</label>
+                <div className="toggle-group citizen-toggle">
+                  <button
+                    className={`toggle-btn ${citizenType === 'indian' ? 'active' : ''}`}
+                    onClick={() => setCitizenType('indian')}
+                  >
+                    <span className="toggle-icon">🇮🇳</span>
+                    Indian Citizen
+                  </button>
+                  <button
+                    className={`toggle-btn ${citizenType === 'foreign' ? 'active' : ''}`}
+                    onClick={() => setCitizenType('foreign')}
+                  >
+                    <span className="toggle-icon">🌍</span>
+                    Foreign Citizen / OCI
+                  </button>
                 </div>
               </div>
-            </div>
 
-            {/* Tax Info */}
-            {citizenType === 'indian' && (
-              <div className="tax-info">
-                <p>As per Indian Income Tax rules, a donor with Indian passport is required to add their Address and PAN number in case they wish to receive the 80G tax-exemption certificate.</p>
-                <p className="no-refund">No refunds will be entertained after the instant tax exemption has been issued.</p>
+              {/* Info Banner */}
+              <div className="info-banner">
+                <span className="info-icon">ⓘ</span>
+                <span>For {citizenType === 'indian' ? 'Indian' : 'Foreign'} Passport holders</span>
               </div>
-            )}
-          </div>
+
+              {/* Frequency Toggle */}
+              <div className="form-group">
+                <label className="form-label">Donation Frequency</label>
+                <div className="toggle-group frequency-toggle">
+                  <button
+                    className={`freq-btn ${frequency === 'onetime' ? 'active' : ''}`}
+                    onClick={() => setFrequency('onetime')}
+                  >
+                    <span className="heart-icon">♥</span> One Time
+                  </button>
+                  <button
+                    className={`freq-btn ${frequency === 'monthly' ? 'active' : ''}`}
+                    onClick={() => setFrequency('monthly')}
+                  >
+                    <span className="heart-icon">♥</span> Monthly
+                  </button>
+                </div>
+              </div>
+
+              {/* Preset Amounts */}
+              <div className="form-group">
+                <label className="form-label">Select Amount</label>
+                <div className="amount-grid">
+                  {presetAmounts.map((amt) => (
+                    <button
+                      key={amt}
+                      className={`amount-btn ${selectedAmount === amt ? 'selected' : ''}`}
+                      onClick={() => handleAmountSelect(amt)}
+                    >
+                      ₹{amt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Custom Amount */}
+              <div className="form-group">
+                <label className="form-label">Or Enter Your Own Amount <span className="required">*</span></label>
+                <div className="custom-input-wrapper">
+                  <span className="currency">₹</span>
+                  <input
+                    type="number"
+                    value={amount}
+                    onChange={handleCustomAmount}
+                    placeholder="Enter amount"
+                    className="custom-input"
+                    min="1"
+                  />
+                </div>
+              </div>
+
+              {/* Cause Selection */}
+              <div className="form-group">
+                <label className="form-label">I Pledge My Support For <span className="required">*</span></label>
+                <select
+                  value={cause}
+                  onChange={(e) => setCause(e.target.value)}
+                  className="cause-dropdown"
+                >
+                  <option value="">Select a cause</option>
+                  {causes.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Tax Info */}
+              {citizenType === 'indian' && (
+                <div className="tax-info">
+                  <p>As per Indian Income Tax rules, a donor with Indian passport is required to add their Address and PAN number in case they wish to receive the 80G tax-exemption certificate.</p>
+                  <p className="no-refund">No refunds will be entertained after the instant tax exemption has been issued.</p>
+                </div>
+              )}
+
+              {/* Next Button */}
+              <button
+                className="donate-next-btn"
+                onClick={handleGoToInfo}
+                disabled={!amount || !cause}
+              >
+                Next — Enter Your Details →
+              </button>
+            </div>
+          )}
+
+          {/* ===== STEP 2: Donor Info ===== */}
+          {step === 2 && (
+            <div className="donate-card step-content fade-in-up">
+              <div className="step-summary-bar">
+                <div className="summary-chip"><span>🏷️</span> ₹{amount}</div>
+                <div className="summary-chip"><span>🎯</span> {cause}</div>
+                <div className="summary-chip"><span>{citizenType === 'indian' ? '🇮🇳' : '🌍'}</span> {citizenType === 'indian' ? 'Indian' : 'Foreign'}</div>
+              </div>
+
+              <h2 className="step-heading">Your Information</h2>
+              <p className="step-desc">Please provide your details so we can acknowledge your generous contribution.</p>
+
+              <div className="form-group">
+                <label className="form-label">Full Name <span className="required">*</span></label>
+                <input
+                  type="text"
+                  value={donorName}
+                  onChange={(e) => setDonorName(e.target.value)}
+                  placeholder="Enter your full name"
+                  className="form-input"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Phone Number <span className="required">*</span></label>
+                <input
+                  type="tel"
+                  value={donorPhone}
+                  onChange={(e) => setDonorPhone(e.target.value)}
+                  placeholder="Enter your phone number"
+                  className="form-input"
+                />
+              </div>
+
+              <div className="step-buttons">
+                <button className="back-btn" onClick={() => setStep(1)}>
+                  ← Back
+                </button>
+                <button
+                  className="donate-next-btn proceed-btn"
+                  onClick={handleProceedToPay}
+                  disabled={!donorName || !donorPhone || submitting}
+                >
+                  {submitting ? 'Processing...' : 'Proceed to Pay →'}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* ===== STEP 3: Payment ===== */}
+          {step === 3 && (
+            <div className="donate-card step-content fade-in-up">
+              <div className="payment-header">
+                <div className="payment-amount-display">
+                  <span className="payment-label">Amount to Pay</span>
+                  <span className="payment-amount">₹{Number(amount).toLocaleString('en-IN')}</span>
+                </div>
+                <div className="payment-purpose">{cause}</div>
+              </div>
+
+              {isMobile ? (
+                /* Mobile — UPI Deep Link */
+                <div className="mobile-payment">
+                  <div className="upi-icon-row">
+                    <span className="upi-app-icon">📱</span>
+                  </div>
+                  <h3 className="payment-title">Pay via UPI App</h3>
+                  <p className="payment-desc">Tap the button below to open your preferred UPI app and complete the payment.</p>
+                  <a
+                    href={upiUri}
+                    className="upi-pay-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Pay ₹{Number(amount).toLocaleString('en-IN')} via UPI
+                  </a>
+                  <div className="upi-apps-hint">
+                    <span>Works with</span>
+                    <div className="app-names">Google Pay • PhonePe • Paytm • BHIM</div>
+                  </div>
+                </div>
+              ) : (
+                /* Desktop — QR Code */
+                <div className="desktop-payment">
+                  <h3 className="payment-title">Scan & Pay</h3>
+                  <p className="payment-desc">Scan this QR code using any UPI app on your phone to complete the payment.</p>
+                  <div className="qr-container">
+                    <div className="qr-wrapper">
+                      <QRCodeSVG
+                        value={upiUri}
+                        size={220}
+                        level="H"
+                        includeMargin={true}
+                        bgColor="#ffffff"
+                        fgColor="#1e3a5f"
+                      />
+                    </div>
+                    <p className="qr-upi-id">UPI ID: <strong>{UPI_ID}</strong></p>
+                  </div>
+                  <div className="upi-apps-hint">
+                    <span>Scan with</span>
+                    <div className="app-names">Google Pay • PhonePe • Paytm • BHIM</div>
+                  </div>
+                </div>
+              )}
+
+              <div className="payment-actions">
+                <button className="payment-done-btn" onClick={handlePaymentDone}>
+                  ✓ I've Completed the Payment
+                </button>
+                <button className="back-btn" onClick={() => setStep(2)}>
+                  ← Go Back
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* ===== STEP 4: Thank You ===== */}
+          {step === 4 && (
+            <div className="donate-card step-content fade-in-up thank-you-card">
+              <div className="thank-you-icon">
+                <svg viewBox="0 0 120 120" className="checkmark-circle">
+                  <circle cx="60" cy="60" r="54" fill="none" stroke="#38a169" strokeWidth="6" className="checkmark-ring" />
+                  <path d="M35 60 L52 77 L85 44" fill="none" stroke="#38a169" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" className="checkmark-path" />
+                </svg>
+              </div>
+              <h2 className="thank-you-title">Thank You, {donorName}! 🙏</h2>
+              <p className="thank-you-message">
+                Your generous donation of <strong>₹{Number(amount).toLocaleString('en-IN')}</strong> for <strong>{cause}</strong> will make a real difference in the lives of those we serve.
+              </p>
+              <p className="thank-you-note">
+                Our team will verify your payment and send you a gratitude message shortly on your registered number.
+              </p>
+
+              <div className="donation-summary">
+                <h4>Donation Summary</h4>
+                <div className="summary-row"><span>Donor</span><span>{donorName}</span></div>
+                <div className="summary-row"><span>Phone</span><span>{donorPhone}</span></div>
+                <div className="summary-row"><span>Amount</span><span>₹{Number(amount).toLocaleString('en-IN')}</span></div>
+                <div className="summary-row"><span>Purpose</span><span>{cause}</span></div>
+                <div className="summary-row"><span>Type</span><span>{frequency === 'onetime' ? 'One Time' : 'Monthly'}</span></div>
+              </div>
+
+              <button className="donate-again-btn" onClick={handleDonateAgain}>
+                Donate Again ♥
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

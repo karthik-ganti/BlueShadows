@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { QRCodeSVG } from 'qrcode.react'
 
 // Google Apps Script URL — replace with your deployed web app URL
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyTk0DIAD9NTE9H2FHGc907Cx7-wJO386czvjDEEzRveQz2TdItgy7jkqU_EuRmC9SBCg/exec'
 
 const UPI_ID = '82537301@ubin'
-const PAYEE_NAME = 'Blue Shadows Foundation'
 
 function Donate() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -18,7 +16,6 @@ function Donate() {
   const [cause, setCause] = useState('')
   const [donorName, setDonorName] = useState('')
   const [donorPhone, setDonorPhone] = useState('')
-  const [isMobile, setIsMobile] = useState(false)
   const [submitting, setSubmitting] = useState(false)
 
   const presetAmounts = ['500', '1000', '2000', '5000', '10000', '20000']
@@ -31,16 +28,7 @@ function Donate() {
     'Youth Awareness Programs'
   ]
 
-  useEffect(() => {
-    const checkMobile = () => {
-      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-        && window.innerWidth <= 768
-      setIsMobile(mobile)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+
 
   // Scroll to top when step changes
   useEffect(() => {
@@ -57,7 +45,7 @@ function Donate() {
     setSelectedAmount(null)
   }
 
-  const upiUri = `upi://pay?pa=${UPI_ID}&pn=BlueShadowsFoundation&am=${amount}&cu=INR&mode=00&tn=Donation`
+
 
   const handleGoToInfo = () => {
     if (!amount || !cause) return
@@ -336,51 +324,20 @@ function Donate() {
                 <div className="payment-purpose">{cause}</div>
               </div>
 
-              {isMobile ? (
-                /* Mobile — UPI Deep Link */
-                <div className="mobile-payment">
-                  <div className="upi-icon-row">
-                    <span className="upi-app-icon">📱</span>
-                  </div>
-                  <h3 className="payment-title">Pay via UPI App</h3>
-                  <p className="payment-desc">Tap the button below to open your preferred UPI app and complete the payment.</p>
-                  <a
-                    href={upiUri}
-                    className="upi-pay-btn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Pay ₹{Number(amount).toLocaleString('en-IN')} via UPI
-                  </a>
-                  <div className="upi-apps-hint">
-                    <span>Works with</span>
-                    <div className="app-names">Google Pay • PhonePe • Paytm • BHIM</div>
+              <div className="unified-payment">
+                <h3 className="payment-title">Scan & Pay</h3>
+                <p className="payment-desc">Open any UPI app on your phone and scan the QR code below to complete your donation.</p>
+                <div className="qr-container">
+                  <div className="qr-wrapper">
+                    <img src="qr-code.jpg" alt="Blue Shadows Foundation UPI QR Code" className="bank-qr-inline" />
                   </div>
                 </div>
-              ) : (
-                /* Desktop — QR Code */
-                <div className="desktop-payment">
-                  <h3 className="payment-title">Scan & Pay</h3>
-                  <p className="payment-desc">Scan this QR code using any UPI app on your phone to complete the payment.</p>
-                  <div className="qr-container">
-                    <div className="qr-wrapper">
-                      <QRCodeSVG
-                        value={upiUri}
-                        size={220}
-                        level="H"
-                        includeMargin={true}
-                        bgColor="#ffffff"
-                        fgColor="#1e3a5f"
-                      />
-                    </div>
-                    <p className="qr-upi-id">UPI ID: <strong>{UPI_ID}</strong></p>
-                  </div>
-                  <div className="upi-apps-hint">
-                    <span>Scan with</span>
-                    <div className="app-names">Google Pay • PhonePe • Paytm • BHIM</div>
-                  </div>
+                <p className="qr-upi-id">UPI ID: <strong>{UPI_ID}</strong></p>
+                <div className="upi-apps-hint">
+                  <span>Scan with</span>
+                  <div className="app-names">Google Pay • PhonePe • Paytm • BHIM • Any UPI App</div>
                 </div>
-              )}
+              </div>
 
               <div className="payment-actions">
                 <button className="payment-done-btn" onClick={handlePaymentDone}>

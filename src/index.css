@@ -16,7 +16,7 @@
   --gray-800: #2d3748;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 body {
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -1330,13 +1330,12 @@ body {
   }
 
   .qr-wrapper {
-    padding: 15px;
+    padding: 10px;
+    max-width: 260px;
   }
 
-  .upi-pay-btn {
-    padding: 16px 30px;
-    font-size: 1.05rem;
-    max-width: 100%;
+  .bank-qr-inline {
+    border-radius: 10px;
   }
 
   .summary-chip {
@@ -1490,18 +1489,25 @@ body {
 .donate-title {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 2.8rem;
+  font-weight: 700;
   color: var(--primary-blue);
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   text-shadow: 0 2px 10px rgba(30, 58, 95, 0.1);
   animation: fadeInUp 0.5s ease-out both;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .donate-subtitle {
   text-align: center;
   color: var(--gray-600);
   margin-bottom: 35px;
-  font-size: 1.15rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
   animation: fadeInUp 0.5s ease-out 0.1s both;
 }
 
@@ -2025,107 +2031,92 @@ body {
   font-weight: 600;
 }
 
-/* Desktop QR */
-.desktop-payment,
-.mobile-payment {
+/* Unified Payment (QR for all devices) */
+.unified-payment {
   text-align: center;
   padding: 20px 0;
 }
 
 .payment-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: var(--primary-blue);
   margin-bottom: 8px;
+  letter-spacing: -0.01em;
 }
 
 .payment-desc {
   color: var(--gray-600);
+  font-family: 'Inter', sans-serif;
   font-size: 0.95rem;
   margin-bottom: 25px;
-  line-height: 1.5;
+  line-height: 1.6;
+  font-weight: 400;
 }
 
 .qr-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .qr-wrapper {
-  padding: 20px;
+  padding: 12px;
   background: var(--white);
   border-radius: 20px;
   box-shadow: 0 8px 30px rgba(30, 58, 95, 0.12);
   border: 3px solid var(--light-blue);
   margin-bottom: 15px;
   animation: pulseGlow 3s ease-in-out infinite;
+  max-width: 300px;
+}
+
+.bank-qr-inline {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
 }
 
 .qr-upi-id {
-  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
   color: var(--gray-600);
+  margin-bottom: 4px;
 }
 
 .qr-upi-id strong {
   color: var(--primary-blue);
-  font-family: 'Courier New', monospace;
-  font-size: 1.15rem;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 1.05rem;
   letter-spacing: 1px;
   background: var(--light-blue);
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 6px;
 }
 
-/* Mobile UPI */
-.upi-icon-row {
-  font-size: 3.5rem;
-  margin-bottom: 15px;
-}
-
-.upi-pay-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px 40px;
-  background: linear-gradient(135deg, #5a2d82, #7c3aed);
-  color: var(--white);
-  border: none;
-  border-radius: 14px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.3);
-  width: 100%;
-  max-width: 350px;
-  box-sizing: border-box;
-}
-
-.upi-pay-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
-}
-
 .upi-apps-hint {
-  margin-top: 20px;
+  margin-top: 18px;
   text-align: center;
 }
 
 .upi-apps-hint span {
-  font-size: 0.8rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
   color: var(--gray-600);
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   font-weight: 600;
 }
 
 .app-names {
+  font-family: 'Inter', sans-serif;
   color: var(--gray-600);
-  font-size: 0.9rem;
-  margin-top: 4px;
+  font-size: 0.88rem;
+  margin-top: 5px;
   font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 /* Payment Actions */

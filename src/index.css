@@ -2481,3 +2481,280 @@ body {
     font-size: 1.5rem;
   }
 }
+
+/* ==================== */
+/* VOLUNTEER PAGE       */
+/* ==================== */
+
+.volunteer-hero {
+  padding: 120px 20px 80px;
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 60%, #1a4a7a 100%);
+  color: var(--white);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.volunteer-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, transparent, var(--white));
+  pointer-events: none;
+}
+
+.volunteer-hero-content {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.volunteer-badge {
+  display: inline-block;
+  padding: 6px 22px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: var(--white);
+}
+
+.volunteer-hero h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.02em;
+}
+
+.volunteer-hero p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 300;
+  line-height: 1.7;
+  opacity: 0.92;
+}
+
+/* Why Volunteer */
+.volunteer-why {
+  padding: 80px 20px;
+  background: var(--white);
+}
+
+.volunteer-intro {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+.volunteer-reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.volunteer-reason-card {
+  background: var(--gray-100);
+  border-radius: 16px;
+  padding: 35px 28px;
+  text-align: center;
+  border-top: 4px solid var(--accent-blue);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.volunteer-reason-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(30, 58, 95, 0.12);
+}
+
+.reason-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.volunteer-reason-card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.3rem;
+  color: var(--primary-blue);
+  margin-bottom: 10px;
+}
+
+.volunteer-reason-card p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+/* Volunteer Contact */
+.volunteer-contact {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, var(--gray-100) 0%, var(--white) 100%);
+}
+
+.volunteer-contact-intro {
+  text-align: center;
+  max-width: 550px;
+  margin: 0 auto 45px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+.volunteer-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  max-width: 900px;
+  margin: 0 auto 50px;
+}
+
+.volunteer-contact-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 35px 25px;
+  text-align: center;
+  box-shadow: 0 6px 25px rgba(30, 58, 95, 0.08);
+  border: 1px solid rgba(49, 130, 206, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.volunteer-contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(30, 58, 95, 0.14);
+}
+
+.contact-card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.volunteer-contact-card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.3rem;
+  color: var(--primary-blue);
+  margin-bottom: 12px;
+}
+
+.contact-card-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 8px;
+  word-break: break-word;
+  transition: color 0.3s;
+}
+
+a.contact-card-link:hover {
+  color: var(--primary-blue);
+}
+
+.contact-card-note {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  font-weight: 400;
+}
+
+/* Social Section */
+.volunteer-social {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.volunteer-social h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  color: var(--primary-blue);
+  margin-bottom: 20px;
+}
+
+.volunteer-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--white);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.social-btn.instagram {
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  box-shadow: 0 4px 15px rgba(131, 58, 180, 0.3);
+}
+
+.social-btn.facebook {
+  background: linear-gradient(135deg, #1877f2, #0d5bbf);
+  box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
+}
+
+.social-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Volunteer Responsive */
+@media (max-width: 768px) {
+  .volunteer-hero {
+    padding: 90px 15px 60px;
+  }
+
+  .volunteer-hero h1 {
+    font-size: 2rem;
+  }
+
+  .volunteer-hero p {
+    font-size: 1rem;
+  }
+
+  .volunteer-why,
+  .volunteer-contact {
+    padding: 50px 15px;
+  }
+
+  .volunteer-reasons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .volunteer-contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .social-btn {
+    padding: 12px 22px;
+    font-size: 0.95rem;
+  }
+}

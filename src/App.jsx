@@ -3,6 +3,7 @@ import { useState } from 'react'
 import './index.css'
 import Founders from './pages/Founders'
 import Donate from './pages/Donate'
+import Volunteer from './pages/Volunteer'
 
 function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -49,8 +50,8 @@ function Home() {
             <h1>Lighting Lives Through Care, Compassion & Change</h1>
             <p>Blue Shadows Foundation is dedicated to improving lives through free medical camps, education for the underprivileged, social service, and community empowerment.</p>
             <div className="hero-buttons">
-              <a href="#donate" className="cta-button">Donate Now</a>
-              <a href="#about" className="cta-button secondary">Volunteer With Us</a>
+              <a href="#/donate" className="cta-button">Donate Now</a>
+              <a href="#/volunteer" className="cta-button secondary">Volunteer With Us</a>
             </div>
           </div>
           <div className="hero-logo-animation">
@@ -293,6 +294,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/founders" element={<Founders />} />
         <Route path="/donate" element={<Donate />} />
+        <Route path="/volunteer" element={<Volunteer />} />
       </Routes>
     </Router>
   )

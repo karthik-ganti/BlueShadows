@@ -393,25 +393,6 @@ function Donate() {
         </div>
       </section>
 
-      {/* ===== Direct Bank QR — Outside the Wizard ===== */}
-      <section className="direct-qr-section">
-        <div className="direct-qr-container">
-          <div className="direct-qr-badge">Quick Pay</div>
-          <h2 className="direct-qr-title">Pay Directly via Bank QR</h2>
-          <p className="direct-qr-desc">
-            Prefer to pay directly? Scan our official Union Bank QR code below with any UPI app. No form required.
-          </p>
-          <div className="direct-qr-card">
-            <img src="qr-code.jpg" alt="Blue Shadows Foundation — Union Bank QR Code" className="direct-qr-image" />
-          </div>
-          <p className="direct-qr-upi">UPI ID: <strong>{UPI_ID}</strong></p>
-          <div className="direct-qr-apps">
-            <span>Works with</span>
-            <div>Google Pay • PhonePe • Paytm • BHIM • Any UPI App</div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <footer className="footer" id="contact">
         <div className="footer-content">

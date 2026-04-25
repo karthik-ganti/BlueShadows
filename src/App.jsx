@@ -109,6 +109,9 @@ function Home() {
             {/* Founder Highlight */}
             <div className="founder-highlight">
               <p className="founder-label">With the Support of</p>
+              <div className="highlight-photo-wrapper">
+                <img src="founder-prakash.jpg" alt="Pamula Prakash Deep" className="highlight-photo" />
+              </div>
               <h3 className="founder-name-highlight">Pamula Prakash Deep</h3>
               <p className="founder-title">The Backbone of Our Mission</p>
               <p className="founder-description">A young entrepreneur whose vision and dedication form the backbone of Blue Shadows Foundation, driving our commitment to create positive change in society.</p>

@@ -2261,6 +2261,147 @@ body {
   box-shadow: 0 8px 25px rgba(49, 130, 206, 0.35);
 }
 
+/* ===== Direct Bank QR Section (Outside Wizard) ===== */
+.direct-qr-section {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, #f0f7ff 0%, var(--white) 100%);
+  text-align: center;
+  position: relative;
+}
+
+.direct-qr-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(49, 130, 206, 0.2), transparent);
+}
+
+.direct-qr-container {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.direct-qr-badge {
+  display: inline-block;
+  padding: 6px 20px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--secondary-blue));
+  color: var(--white);
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.direct-qr-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.direct-qr-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  color: var(--gray-600);
+  line-height: 1.7;
+  margin-bottom: 30px;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.direct-qr-card {
+  display: inline-block;
+  background: var(--white);
+  padding: 16px;
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(30, 58, 95, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 2px solid rgba(49, 130, 206, 0.12);
+  margin-bottom: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.direct-qr-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 50px rgba(30, 58, 95, 0.16), 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.direct-qr-image {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+.direct-qr-upi {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--gray-600);
+  margin-bottom: 16px;
+}
+
+.direct-qr-upi strong {
+  color: var(--primary-blue);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+  background: var(--light-blue);
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+.direct-qr-apps {
+  text-align: center;
+}
+
+.direct-qr-apps span {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.direct-qr-apps div {
+  font-family: 'Inter', sans-serif;
+  color: var(--gray-600);
+  font-size: 0.88rem;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .direct-qr-section {
+    padding: 50px 15px;
+  }
+
+  .direct-qr-title {
+    font-size: 1.6rem;
+  }
+
+  .direct-qr-desc {
+    font-size: 0.95rem;
+  }
+
+  .direct-qr-card {
+    padding: 12px;
+  }
+
+  .direct-qr-image {
+    max-width: 260px;
+  }
+}
+
 /* Extra small devices */
 @media (max-width: 480px) {
   .hero-content h1 {

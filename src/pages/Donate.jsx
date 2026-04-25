@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { QRCodeSVG } from 'qrcode.react'
 
 // Google Apps Script URL — replace with your deployed web app URL
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyTk0DIAD9NTE9H2FHGc907Cx7-wJO386czvjDEEzRveQz2TdItgy7jkqU_EuRmC9SBCg/exec'
@@ -45,6 +46,7 @@ function Donate() {
     setSelectedAmount(null)
   }
 
+  const upiUri = `upi://pay?pa=${UPI_ID}&pn=BlueShadowsFoundation&am=${amount}&cu=INR&mode=00&tn=Donation`
 
 
   const handleGoToInfo = () => {
@@ -326,10 +328,17 @@ function Donate() {
 
               <div className="unified-payment">
                 <h3 className="payment-title">Scan & Pay</h3>
-                <p className="payment-desc">Open any UPI app on your phone and scan the QR code below to complete your donation.</p>
+                <p className="payment-desc">Scan this QR code using any UPI app on your phone. The amount of <strong>₹{Number(amount).toLocaleString('en-IN')}</strong> is pre-filled for you.</p>
                 <div className="qr-container">
                   <div className="qr-wrapper">
-                    <img src="qr-code.jpg" alt="Blue Shadows Foundation UPI QR Code" className="bank-qr-inline" />
+                    <QRCodeSVG
+                      value={upiUri}
+                      size={220}
+                      level="H"
+                      includeMargin={true}
+                      bgColor="#ffffff"
+                      fgColor="#1e3a5f"
+                    />
                   </div>
                 </div>
                 <p className="qr-upi-id">UPI ID: <strong>{UPI_ID}</strong></p>
@@ -381,6 +390,25 @@ function Donate() {
               </button>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* ===== Direct Bank QR — Outside the Wizard ===== */}
+      <section className="direct-qr-section">
+        <div className="direct-qr-container">
+          <div className="direct-qr-badge">Quick Pay</div>
+          <h2 className="direct-qr-title">Pay Directly via Bank QR</h2>
+          <p className="direct-qr-desc">
+            Prefer to pay directly? Scan our official Union Bank QR code below with any UPI app. No form required.
+          </p>
+          <div className="direct-qr-card">
+            <img src="qr-code.jpg" alt="Blue Shadows Foundation — Union Bank QR Code" className="direct-qr-image" />
+          </div>
+          <p className="direct-qr-upi">UPI ID: <strong>{UPI_ID}</strong></p>
+          <div className="direct-qr-apps">
+            <span>Works with</span>
+            <div>Google Pay • PhonePe • Paytm • BHIM • Any UPI App</div>
+          </div>
         </div>
       </section>
 

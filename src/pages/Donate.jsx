@@ -67,7 +67,7 @@ function Donate() {
         name: donorName,
         phone: donorPhone,
         frequency: frequency,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
       })
 
       // Use text/plain to avoid CORS preflight — Google Apps Script
@@ -423,6 +423,7 @@ function Donate() {
             <ul>
               <li><a href="https://www.instagram.com/bluee_shadowss?utm_source=ig_web_button_share_sheet&igsh=ODdmZWVhMTFiMw==" target="_blank" rel="noopener noreferrer">Instagram</a></li>
               <li><a href="https://www.facebook.com/share/1CejWhfb9z/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+              <li><a href="https://chat.whatsapp.com/JZXlyRJjzqf3Fq0qewLIOf?mode=gi_t" target="_blank" rel="noopener noreferrer">WhatsApp Community</a></li>
             </ul>
           </div>
         </div>

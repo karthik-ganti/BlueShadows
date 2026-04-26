@@ -1,8 +1,85 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+
+// Google Apps Script URL — replace with your deployed web app URL
+const VOLUNTEER_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyW6zOKmbbwWGcbEiYjGNU6iKpHE5o5jOmQLPu_3PxcC0NHx7XzAnpth2ij9RZxU65zaw/exec'
 
 function Volunteer() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [showForm, setShowForm] = useState(false)
+  const [formStep, setFormStep] = useState(1) // 1 = form, 2 = success
+  const [submitting, setSubmitting] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    address: ''
+  })
+  const [errors, setErrors] = useState({})
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (showForm) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [showForm])
+
+  const validate = () => {
+    const newErrors = {}
+    if (!formData.name.trim()) newErrors.name = 'Full name is required'
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required'
+    else if (!/^[0-9]{10}$/.test(formData.phone.trim())) newErrors.phone = 'Enter a valid 10-digit phone number'
+    if (!formData.address.trim()) newErrors.address = 'Address is required'
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+    // Clear error on typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }))
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!validate()) return
+
+    setSubmitting(true)
+    try {
+      const payload = JSON.stringify({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        address: formData.address.trim(),
+        timestamp: new Date().toISOString()
+      })
+
+      await fetch(VOLUNTEER_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: payload
+      })
+
+      setFormStep(2) // success
+    } catch (err) {
+      console.log('Volunteer submission error:', err)
+      // Still show success since no-cors doesn't give response
+      setFormStep(2)
+    }
+    setSubmitting(false)
+  }
+
+  const handleCloseForm = () => {
+    setShowForm(false)
+    setFormStep(1)
+    setFormData({ name: '', phone: '', address: '' })
+    setErrors({})
+  }
 
   return (
     <div className="app">
@@ -35,6 +112,10 @@ function Volunteer() {
           <span className="volunteer-badge">Join Our Mission</span>
           <h1>Volunteer With Us</h1>
           <p>Be the change you want to see. Join Blue Shadows Foundation and help us bring light to those living in the shadows.</p>
+          <button className="volunteer-cta-btn" onClick={() => setShowForm(true)} id="volunteer-signup-btn">
+            <span className="btn-icon">🤝</span>
+            Volunteer With Us
+          </button>
         </div>
       </section>
 
@@ -63,6 +144,20 @@ function Volunteer() {
               <div className="reason-icon">🤝</div>
               <h3>Community Building</h3>
               <p>Be part of youth awareness programs, community development, and social service events.</p>
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="volunteer-cta-section">
+            <div className="volunteer-cta-card">
+              <div className="cta-card-content">
+                <h3>Ready to Make a Difference?</h3>
+                <p>Join our growing community of changemakers. Register today and start your volunteering journey with Blue Shadows Foundation.</p>
+                <button className="volunteer-cta-btn secondary" onClick={() => setShowForm(true)} id="volunteer-register-btn">
+                  <span className="btn-icon">✋</span>
+                  Register as a Volunteer
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -116,6 +211,159 @@ function Volunteer() {
           </div>
         </div>
       </section>
+
+      {/* ========== VOLUNTEER REGISTRATION MODAL ========== */}
+      {showForm && (
+        <div className="vol-modal-overlay" onClick={handleCloseForm}>
+          <div className="vol-modal" onClick={(e) => e.stopPropagation()}>
+            {/* Close Button */}
+            <button className="vol-modal-close" onClick={handleCloseForm} aria-label="Close" id="volunteer-modal-close">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+
+            {formStep === 1 && (
+              <div className="vol-form-content fade-in-up">
+                {/* Logo */}
+                <div className="vol-form-logo">
+                  <img src="logo.jpg" alt="Blue Shadows Foundation" />
+                </div>
+
+                <div className="vol-form-header">
+                  <span className="vol-form-badge">Volunteer Registration</span>
+                  <h2>Join Blue Shadows</h2>
+                  <p>Fill in your details below and become part of our mission to uplift communities.</p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="vol-form" id="volunteer-form">
+                  {/* Full Name */}
+                  <div className="vol-form-group">
+                    <label className="vol-form-label" htmlFor="vol-name">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                      Full Name <span className="required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="vol-name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Enter your full name"
+                      className={`vol-form-input ${errors.name ? 'error' : ''}`}
+                      autoComplete="name"
+                    />
+                    {errors.name && <span className="vol-error">{errors.name}</span>}
+                  </div>
+
+                  {/* Phone Number */}
+                  <div className="vol-form-group">
+                    <label className="vol-form-label" htmlFor="vol-phone">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                      </svg>
+                      Phone Number <span className="required">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      id="vol-phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Enter your 10-digit phone number"
+                      className={`vol-form-input ${errors.phone ? 'error' : ''}`}
+                      autoComplete="tel"
+                      maxLength="10"
+                    />
+                    {errors.phone && <span className="vol-error">{errors.phone}</span>}
+                  </div>
+
+                  {/* Address */}
+                  <div className="vol-form-group">
+                    <label className="vol-form-label" htmlFor="vol-address">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      Address <span className="required">*</span>
+                    </label>
+                    <textarea
+                      id="vol-address"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      placeholder="Enter your full address"
+                      className={`vol-form-input vol-textarea ${errors.address ? 'error' : ''}`}
+                      rows="3"
+                      autoComplete="street-address"
+                    />
+                    {errors.address && <span className="vol-error">{errors.address}</span>}
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="vol-submit-btn"
+                    disabled={submitting}
+                    id="volunteer-submit-btn"
+                  >
+                    {submitting ? (
+                      <>
+                        <span className="vol-spinner"></span>
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        Submit Registration
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                      </>
+                    )}
+                  </button>
+                </form>
+
+                <p className="vol-form-footer">
+                  By submitting, you agree to be contacted by Blue Shadows Foundation regarding volunteer opportunities.
+                </p>
+              </div>
+            )}
+
+            {formStep === 2 && (
+              <div className="vol-success-content fade-in-up">
+                <div className="vol-success-icon">
+                  <svg viewBox="0 0 120 120" className="vol-checkmark-circle">
+                    <circle cx="60" cy="60" r="54" fill="none" stroke="#38a169" strokeWidth="6" className="vol-checkmark-ring" />
+                    <path d="M35 60 L52 77 L85 44" fill="none" stroke="#38a169" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" className="vol-checkmark-path" />
+                  </svg>
+                </div>
+                <div className="vol-form-logo">
+                  <img src="logo.jpg" alt="Blue Shadows Foundation" />
+                </div>
+                <h2 className="vol-success-title">Thank You, {formData.name}! 🎉</h2>
+                <p className="vol-success-msg">
+                  Your volunteer registration has been received successfully. Welcome to the Blue Shadows family!
+                </p>
+                <p className="vol-success-note">
+                  Our team will reach out to you at <strong>{formData.phone}</strong> within 48 hours to get you started on your volunteering journey.
+                </p>
+                <div className="vol-success-summary">
+                  <div className="vol-summary-row"><span>Name</span><span>{formData.name}</span></div>
+                  <div className="vol-summary-row"><span>Phone</span><span>{formData.phone}</span></div>
+                  <div className="vol-summary-row"><span>Address</span><span>{formData.address}</span></div>
+                </div>
+                <button className="vol-done-btn" onClick={handleCloseForm} id="volunteer-done-btn">
+                  Done ✓
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="footer" id="contact">

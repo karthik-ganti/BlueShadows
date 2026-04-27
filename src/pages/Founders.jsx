@@ -64,6 +64,7 @@ function Founders() {
                 'Balla Kishore',
                 'Jalem Radha',
                 'Jalem Janardhan',
+                'Karthik Ganti',
               ].map((name, index) => (
                 <div className="team-name-card" key={index} style={{ animationDelay: `${index * 0.08}s` }}>
                   <div className="team-name-icon">

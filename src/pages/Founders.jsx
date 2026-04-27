@@ -32,7 +32,7 @@ function Founders() {
       <section className="founders-hero">
         <div className="container">
           <h1>Meet Our Founders</h1>
-          
+
           <div className="founders-photo-section">
             <div className="founders-group-photo">
               <img src="founders.jpg" alt="Founders of Blue Shadows" />
@@ -50,40 +50,40 @@ function Founders() {
 
           {/* Our Constant Supporters */}
           <div className="team-section supporters-section">
-            <h2 className="team-section-title">
-              <span className="title-icon">★</span>
-              Our Constant Supporters
-            </h2>
+            <div className="team-section-header">
+              <div className="team-title-line"></div>
+              <h2 className="team-section-title">★ Our Constant Supporters ★</h2>
+              <div className="team-title-line"></div>
+            </div>
             <p className="team-section-subtitle">The pillars behind our every step</p>
-            <div className="team-names-grid">
+            <div className="team-names-flow">
               {[
                 'Odugu Kodhanda Rama ChandraSekhar',
                 'Gudise Akhil',
                 'Nakka Vikas',
                 'Kandikatla Suhas',
                 'Balla Kishore',
-                'Jalem Radha',
-                'Jalem Janardhan',
+                'Jalem RadhaJanardhan',
                 'Karthik Ganti',
-              ].map((name, index) => (
-                <div className="team-name-card" key={index} style={{ animationDelay: `${index * 0.08}s` }}>
-                  <div className="team-name-icon">
-                    {name.split(' ').map(n => n[0]).slice(0, 2).join('')}
-                  </div>
-                  <span className="team-member-name">{name}</span>
-                </div>
+                'Kakarla Sirisha',
+              ].map((name, index, arr) => (
+                <span key={index} className="team-name-item">
+                  <span className="team-name-text">{name}</span>
+                  {index < arr.length - 1 && <span className="team-name-dot">&bull;</span>}
+                </span>
               ))}
             </div>
           </div>
 
           {/* Our Core Team */}
           <div className="team-section core-team-section">
-            <h2 className="team-section-title">
-              <span className="title-icon">◆</span>
-              Our Core Team
-            </h2>
+            <div className="team-section-header">
+              <div className="team-title-line"></div>
+              <h2 className="team-section-title">★ Our Core Team ★</h2>
+              <div className="team-title-line"></div>
+            </div>
             <p className="team-section-subtitle">The hands that make our vision a reality</p>
-            <div className="team-names-grid">
+            <div className="team-names-flow">
               {[
                 'Bonthu RajaMadhu',
                 'Dara Vinay',
@@ -94,13 +94,11 @@ function Founders() {
                 'Nakka Raj Kumar',
                 'Kusuma Rajesh',
                 'Chintha Rajvardhan',
-              ].map((name, index) => (
-                <div className="team-name-card" key={index} style={{ animationDelay: `${index * 0.08}s` }}>
-                  <div className="team-name-icon">
-                    {name.split(' ').map(n => n[0]).slice(0, 2).join('')}
-                  </div>
-                  <span className="team-member-name">{name}</span>
-                </div>
+              ].map((name, index, arr) => (
+                <span key={index} className="team-name-item">
+                  <span className="team-name-text">{name}</span>
+                  {index < arr.length - 1 && <span className="team-name-dot">&bull;</span>}
+                </span>
               ))}
             </div>
           </div>

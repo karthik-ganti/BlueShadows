@@ -1574,19 +1574,28 @@ body {
   }
 
   .bank-detail-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
     padding: 11px 16px;
   }
 
+  .bank-detail-label {
+    font-size: 0.72rem;
+    min-width: fit-content;
+  }
+
   .bank-detail-value {
-    text-align: left;
-    font-size: 0.9rem;
+    text-align: right;
+    font-size: 0.82rem;
+    word-break: keep-all;
+    white-space: nowrap;
   }
 
   .bank-detail-value.mono {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
+    padding: 6px 10px;
+    letter-spacing: 1px;
   }
 
   .bank-quote {
@@ -2258,11 +2267,14 @@ body {
 
 .bank-detail-value.mono {
   font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  background: rgba(49, 130, 206, 0.08);
-  padding: 4px 10px;
-  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  background: linear-gradient(135deg, rgba(49, 130, 206, 0.12), rgba(30, 58, 95, 0.1));
+  color: var(--accent-blue);
+  padding: 8px 14px;
+  border-radius: 8px;
+  border-left: 3px solid var(--accent-blue);
 }
 
 .bank-quote {

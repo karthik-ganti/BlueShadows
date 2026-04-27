@@ -295,7 +295,7 @@ function Donate() {
                   <div className="bank-details-grid">
                     <div className="bank-detail-row">
                       <span className="bank-detail-label">Account Holder</span>
-                      <span className="bank-detail-value">M/S BLUE SHADOWS FOUNDATION</span>
+                      <span className="bank-detail-value">BLUE SHADOWS FOUNDATION</span>
                     </div>
                     <div className="bank-detail-row">
                       <span className="bank-detail-label">Account Number</span>

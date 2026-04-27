@@ -47,6 +47,63 @@ function Founders() {
               <span className="founder-name">Ch. Siddhartha</span>
             </div>
           </div>
+
+          {/* Our Constant Supporters */}
+          <div className="team-section supporters-section">
+            <h2 className="team-section-title">
+              <span className="title-icon">★</span>
+              Our Constant Supporters
+            </h2>
+            <p className="team-section-subtitle">The pillars behind our every step</p>
+            <div className="team-names-grid">
+              {[
+                'Odugu Kodhanda Rama ChandraSekhar',
+                'Gudise Akhil',
+                'Nakka Vikas',
+                'Kandikatla Suhas',
+                'Balla Kishore',
+                'Jalem Radha',
+                'Jalem Janardhan',
+              ].map((name, index) => (
+                <div className="team-name-card" key={index} style={{ animationDelay: `${index * 0.08}s` }}>
+                  <div className="team-name-icon">
+                    {name.split(' ').map(n => n[0]).slice(0, 2).join('')}
+                  </div>
+                  <span className="team-member-name">{name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Our Core Team */}
+          <div className="team-section core-team-section">
+            <h2 className="team-section-title">
+              <span className="title-icon">◆</span>
+              Our Core Team
+            </h2>
+            <p className="team-section-subtitle">The hands that make our vision a reality</p>
+            <div className="team-names-grid">
+              {[
+                'Bonthu RajaMadhu',
+                'Dara Vinay',
+                'Revu Prasad',
+                'Chille Vijay',
+                'Pothula David',
+                'Kusuma Abhi',
+                'Nakka Raj Kumar',
+                'Kusuma Rajesh',
+                'Chintha Rajvardhan',
+              ].map((name, index) => (
+                <div className="team-name-card" key={index} style={{ animationDelay: `${index * 0.08}s` }}>
+                  <div className="team-name-icon">
+                    {name.split(' ').map(n => n[0]).slice(0, 2).join('')}
+                  </div>
+                  <span className="team-member-name">{name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -84,7 +141,12 @@ function Founders() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2025 Blue Shadows. All rights reserved.</p>
+          <div className="footer-legal">
+            <span>Registration No: 261/2025</span>
+            <span className="footer-legal-sep">|</span>
+            <span>DARPAN ID: AP/2026/1066271</span>
+          </div>
+          <p>&copy; 2026 Blue Shadows. All rights reserved.</p>
         </div>
       </footer>
     </div>

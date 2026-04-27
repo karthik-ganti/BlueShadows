@@ -281,6 +281,11 @@ function Home() {
           </div>
         </div>
         <div className="footer-bottom">
+          <div className="footer-legal">
+            <span>Registration No: 261/2025</span>
+            <span className="footer-legal-sep">|</span>
+            <span>DARPAN ID: AP/2026/1066271</span>
+          </div>
           <p>&copy; 2026 Blue Shadows. All rights reserved.</p>
         </div>
       </footer>

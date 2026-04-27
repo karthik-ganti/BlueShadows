@@ -9,6 +9,7 @@ const UPI_ID = '82537301@ubin'
 
 function Donate() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [showBankDetails, setShowBankDetails] = useState(false)
   const [step, setStep] = useState(1)
   const [citizenType, setCitizenType] = useState('indian')
   const [frequency, setFrequency] = useState('onetime')
@@ -263,6 +264,63 @@ function Donate() {
               >
                 Next — Enter Your Details →
               </button>
+
+              {/* Divider */}
+              <div className="bank-divider">
+                <span className="bank-divider-line"></span>
+                <span className="bank-divider-text">or</span>
+                <span className="bank-divider-line"></span>
+              </div>
+
+              {/* Bank Transfer Toggle */}
+              <button
+                className={`bank-transfer-toggle ${showBankDetails ? 'active' : ''}`}
+                onClick={() => setShowBankDetails(!showBankDetails)}
+                type="button"
+              >
+                <span className="bank-toggle-icon">🏦</span>
+                <span className="bank-toggle-text">
+                  <strong>Donate via Bank Transfer</strong>
+                  <small>NEFT / IMPS / RTGS</small>
+                </span>
+                <span className={`bank-toggle-arrow ${showBankDetails ? 'open' : ''}`}>▼</span>
+              </button>
+
+              {showBankDetails && (
+                <div className="bank-details-card fade-in-up">
+                  <div className="bank-details-header">
+                    <h3>Bank Account Details</h3>
+                    <p>Transfer directly to our official NGO bank account</p>
+                  </div>
+                  <div className="bank-details-grid">
+                    <div className="bank-detail-row">
+                      <span className="bank-detail-label">Account Holder</span>
+                      <span className="bank-detail-value">M/S BLUE SHADOWS FOUNDATION</span>
+                    </div>
+                    <div className="bank-detail-row">
+                      <span className="bank-detail-label">Account Number</span>
+                      <span className="bank-detail-value mono">057212010002805</span>
+                    </div>
+                    <div className="bank-detail-row">
+                      <span className="bank-detail-label">IFSC Code</span>
+                      <span className="bank-detail-value mono">UBIN0805726</span>
+                    </div>
+                    <div className="bank-detail-row">
+                      <span className="bank-detail-label">Bank Name</span>
+                      <span className="bank-detail-value">Union Bank of India</span>
+                    </div>
+                    <div className="bank-detail-row">
+                      <span className="bank-detail-label">Branch</span>
+                      <span className="bank-detail-value">Tatipaka</span>
+                    </div>
+                  </div>
+                  <div className="bank-quote">
+                    <span className="bank-quote-mark">❝</span>
+                    <p>"No one has ever become poor by giving." — <em>Anne Frank</em></p>
+                  </div>
+                  <p className="bank-note">After completing your transfer, please share a screenshot or transaction ID with us on WhatsApp at <strong>78283 23456</strong> so we can acknowledge your donation.</p>
+                </div>
+              )}
             </div>
           )}
 
@@ -428,7 +486,12 @@ function Donate() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2025 Blue Shadows. All rights reserved.</p>
+          <div className="footer-legal">
+            <span>Registration No: 261/2025</span>
+            <span className="footer-legal-sep">|</span>
+            <span>DARPAN ID: AP/2026/1066271</span>
+          </div>
+          <p>&copy; 2026 Blue Shadows. All rights reserved.</p>
         </div>
       </footer>
     </div>

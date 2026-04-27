@@ -1571,37 +1571,38 @@ body {
   }
 
   .bank-details-card {
-    padding: 18px 14px;
+    padding: 14px 10px;
   }
 
-  .bank-details-header h3 {
-    font-size: 1.1rem;
+  .bank-details-grid {
+    padding: 0;
   }
 
   .bank-detail-row {
     flex-direction: column;
     align-items: center;
-    gap: 4px;
-    padding: 12px 16px;
+    gap: 3px;
+    padding: 10px 10px;
     text-align: center;
   }
 
   .bank-detail-label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     letter-spacing: 1px;
   }
 
   .bank-detail-value {
     text-align: center;
-    font-size: 0.7rem;
-    word-break: normal;
-    white-space: normal;
+    font-size: 0.75rem;
+    font-weight: 500;
+    word-break: keep-all;
+    white-space: nowrap;
   }
 
   .bank-detail-value.mono {
-    font-size: 0.78rem;
-    padding: 6px 12px;
-    letter-spacing: 1px;
+    font-size: 0.72rem;
+    padding: 5px 10px;
+    letter-spacing: 0.8px;
     border-left: none;
     border-bottom: 3px solid var(--accent-blue);
   }

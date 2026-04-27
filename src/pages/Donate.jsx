@@ -251,8 +251,8 @@ function Donate() {
               {/* Tax Info */}
               {citizenType === 'indian' && (
                 <div className="tax-info">
-                  <p>As per Indian Income Tax rules, a donor with Indian passport is required to add their Address and PAN number in case they wish to receive the 80G tax-exemption certificate.</p>
-                  <p className="no-refund">No refunds will be entertained after the instant tax exemption has been issued.</p>
+                  <p>We are in the process of obtaining the necessary certifications (12A and 80G) to provide tax benefits to our donors in the future.</p>
+                  <p style={{ fontWeight: 600, color: 'var(--primary-blue)', marginTop: '8px' }}>We sincerely appreciate your support towards our mission.</p>
                 </div>
               )}
 

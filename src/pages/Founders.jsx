@@ -58,14 +58,14 @@ function Founders() {
             <p className="team-section-subtitle">The pillars behind our every step</p>
             <div className="team-names-flow">
               {[
-                'Odugu Kodhanda Rama ChandraSekhar',
-                'Gudise Akhil',
-                'Nakka Vikas',
-                'Kandikatla Suhas',
                 'Balla Kishore',
+                'Gudise Akhil',
                 'Jalem RadhaJanardhan',
                 'Kakarla Sirisha',
+                'Kandikatla Suhas',
                 'Karthik Ganti',
+                'Nakka Vikas',
+                'Odugu Kodhanda Rama ChandraSekhar',
               ].map((name, index, arr) => (
                 <span key={index} className="team-name-item">
                   <span className="team-name-text">{name}</span>
@@ -86,14 +86,14 @@ function Founders() {
             <div className="team-names-flow">
               {[
                 'Bonthu RajaMadhu',
-                'Dara Vinay',
-                'Revu Prasad',
                 'Chille Vijay',
-                'Pothula David',
-                'Kusuma Abhi',
-                'Nakka Raj Kumar',
-                'Kusuma Rajesh',
                 'Chintha Rajvardhan',
+                'Dara Vinay',
+                'Kusuma Abhi',
+                'Kusuma Rajesh',
+                'Nakka Raj Kumar',
+                'Pothula David',
+                'Revu Prasad',
               ].map((name, index, arr) => (
                 <span key={index} className="team-name-item">
                   <span className="team-name-text">{name}</span>

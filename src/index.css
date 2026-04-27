@@ -1446,16 +1446,18 @@ body {
   }
 
   .team-names-flow {
-    padding: 18px 16px;
-    gap: 4px 2px;
+    padding: 20px 16px;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .team-name-text {
-    font-size: 1rem;
+    font-size: 1.05rem;
+    text-align: center;
   }
 
   .team-name-dot {
-    margin: 0 4px;
+    display: none;
   }
 
   /* Donate Page Mobile */

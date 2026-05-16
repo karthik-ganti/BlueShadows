@@ -11,8 +11,8 @@ import Volunteer from './pages/Volunteer'
 // ─── Impact Stats Counter ────────────────────────────────────────────────────
 
 const STATS = [
-  { label: 'Food Groceries', value: 500, suffix: '+' },
-  { label: 'Lives Impacted', value: 5000, suffix: '+' },
+  { label: 'Food & Groceries', value: 500, suffix: '+' },
+  { label: 'Lives Impacted', value: 1500, suffix: '+' },
   { label: 'Villages Reached', value: 20, suffix: '+' },
   { label: 'Active Volunteers', value: 100, suffix: '+' },
   { label: 'Education Support', value: 1, suffix: '' },

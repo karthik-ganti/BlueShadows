@@ -4097,120 +4097,117 @@ a.contact-card-link:hover {
 }
 
 /* ===================================================================
-   VOLUNTEER E-CARD SYSTEM
+   VOLUNTEER E-CARD SYSTEM (blue-top / white-bottom)
 =================================================================== */
 
 .vol-ecard {
   width: 320px;
   margin: 20px auto 12px;
-  background: linear-gradient(160deg, #0a1628 0%, #0f2347 55%, #1a3a6b 100%);
-  border-radius: 20px;
-  padding: 32px 24px 24px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22), 0 4px 12px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Black header strip */
+.vol-ecard-header {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 11px 16px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* Blue gradient top zone */
+.vol-ecard-top {
+  background: linear-gradient(180deg, #1d4ed8 0%, #3b82f6 45%, #93c5fd 80%, #fff 100%);
+  padding: 28px 24px 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-  position: relative;
-  overflow: hidden;
-}
-
-.vol-ecard::before {
-  content: '';
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.vol-ecard::after {
-  content: '';
-  position: absolute;
-  bottom: -40px;
-  left: -40px;
-  width: 140px;
-  height: 140px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
-  pointer-events: none;
 }
 
 .vol-ecard-logo img {
-  width: 68px;
-  height: 68px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  margin-bottom: 10px;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  margin-bottom: 14px;
+  object-fit: cover;
   display: block;
 }
 
 .vol-ecard-org {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #fff;
-  margin: 0 0 4px;
+  margin: 0 0 8px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
-.vol-ecard-website {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.4);
-  margin: 0 0 4px;
-  letter-spacing: 0.5px;
-}
-
-.vol-ecard-divider {
-  width: 100%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.12);
-  margin: 12px 0;
-}
-
-.vol-ecard-badge {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  color: #60a5fa;
+.vol-ecard-volunteer-label {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  margin: 4px 0 14px;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* White bottom zone */
+.vol-ecard-bottom {
+  background: #fff;
+  padding: 20px 24px 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.vol-ecard-field-label {
+  font-size: 0.62rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #9ca3af;
+  font-weight: 600;
+  margin: 0 0 3px;
+}
+
+.vol-ecard-id-value + .vol-ecard-field-label {
+  margin-top: 14px;
 }
 
 .vol-ecard-name {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.55rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 0 0 14px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e3a8a;
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 1px;
+  margin: 0;
   word-break: break-word;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
-.vol-ecard-id {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-size: 0.82rem;
-  color: #93c5fd;
-  background: rgba(59, 130, 246, 0.14);
-  border: 1px solid rgba(59, 130, 246, 0.28);
-  border-radius: 6px;
-  padding: 4px 12px;
-  margin: 0 0 7px;
-}
-
-.vol-ecard-date {
-  font-size: 0.76rem;
-  color: rgba(255, 255, 255, 0.45);
+.vol-ecard-id-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.5px;
   margin: 0;
 }
 
-.vol-ecard-tagline {
-  font-size: 0.76rem;
-  font-style: italic;
-  color: rgba(255, 255, 255, 0.35);
-  margin: 6px 0 0;
-  line-height: 1.5;
+.vol-ecard-website {
+  font-size: 0.68rem;
+  color: #9ca3af;
+  margin: 16px 0 0;
+  letter-spacing: 0.5px;
 }
 
 .vol-download-btn {

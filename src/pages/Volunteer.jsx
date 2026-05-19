@@ -333,18 +333,28 @@ function Volunteer() {
 
                 {/* E-Card */}
                 <div className="vol-ecard" ref={eCardRef}>
-                  <div className="vol-ecard-logo">
-                    <img src="logo.jpg" alt="Blue Shadows Foundation" crossOrigin="anonymous" />
+                  {/* Zone 1 — black header bar */}
+                  <div className="vol-ecard-header">
+                    VOLUNTEER &nbsp;|&nbsp; E-CARD
                   </div>
-                  <h3 className="vol-ecard-org">Blue Shadows Foundation</h3>
-                  <p className="vol-ecard-website">blueshadowsfoundations.org</p>
-                  <div className="vol-ecard-divider" />
-                  <p className="vol-ecard-badge">✦ OFFICIAL VOLUNTEER ✦</p>
-                  <h2 className="vol-ecard-name">{formData.name}</h2>
-                  <p className="vol-ecard-id">ID : {volunteerId}</p>
-                  <p className="vol-ecard-date">Joined : {joinDate}</p>
-                  <div className="vol-ecard-divider" />
-                  <p className="vol-ecard-tagline">"Bringing light to those living in the shadows."</p>
+
+                  {/* Zone 2 — blue gradient section */}
+                  <div className="vol-ecard-top">
+                    <div className="vol-ecard-logo">
+                      <img src="logo.jpg" alt="Blue Shadows Foundation" crossOrigin="anonymous" />
+                    </div>
+                    <h3 className="vol-ecard-org">Blue Shadows Foundation</h3>
+                    <p className="vol-ecard-volunteer-label">VOLUNTEER</p>
+                  </div>
+
+                  {/* Zone 3 — white section with name + ID */}
+                  <div className="vol-ecard-bottom">
+                    <p className="vol-ecard-field-label">NAME</p>
+                    <h2 className="vol-ecard-name">{formData.name.toUpperCase()}</h2>
+                    <p className="vol-ecard-field-label" style={{marginTop:'14px'}}>VOLUNTEER ID</p>
+                    <p className="vol-ecard-id-value">{volunteerId}</p>
+                    <p className="vol-ecard-website">blueshadowsfoundations.org</p>
+                  </div>
                 </div>
 
                 <button className="vol-download-btn" onClick={handleDownloadCard}>

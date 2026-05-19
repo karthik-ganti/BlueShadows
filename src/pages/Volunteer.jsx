@@ -41,9 +41,8 @@ function Volunteer() {
     if (!validate()) return
     setSubmitting(true)
     try {
-      const year = new Date().getFullYear()
       const rand = Math.floor(10000 + Math.random() * 90000)
-      const id = `BSF-VOL-${year}-${rand}`
+      const id = `BSF-${rand}`
       const date = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' })
       setVolunteerId(id)
       setJoinDate(date)
@@ -333,26 +332,26 @@ function Volunteer() {
 
                 {/* E-Card */}
                 <div className="vol-ecard" ref={eCardRef}>
-                  {/* Zone 1 — black header bar */}
+                  {/* Zone 1 — black header */}
                   <div className="vol-ecard-header">
-                    VOLUNTEER &nbsp;|&nbsp; E-CARD
+                    Volunteer &nbsp;|&nbsp; e Card
                   </div>
 
-                  {/* Zone 2 — blue gradient section */}
+                  {/* Zone 2 — teal gradient: name + ID */}
                   <div className="vol-ecard-top">
+                    <p className="vol-ecard-field-label">NAME</p>
+                    <h2 className="vol-ecard-name">{formData.name.toUpperCase()}</h2>
+                    <p className="vol-ecard-field-label vol-ecard-field-label--gap">ID</p>
+                    <p className="vol-ecard-id-value">{volunteerId}</p>
+                  </div>
+
+                  {/* Zone 3 — white: org + VOLUNTEER + logo + website */}
+                  <div className="vol-ecard-bottom">
+                    <p className="vol-ecard-org">Blue Shadows Foundation</p>
+                    <p className="vol-ecard-volunteer-label">VOLUNTEER</p>
                     <div className="vol-ecard-logo">
                       <img src="logo.jpg" alt="Blue Shadows Foundation" crossOrigin="anonymous" />
                     </div>
-                    <h3 className="vol-ecard-org">Blue Shadows Foundation</h3>
-                    <p className="vol-ecard-volunteer-label">VOLUNTEER</p>
-                  </div>
-
-                  {/* Zone 3 — white section with name + ID */}
-                  <div className="vol-ecard-bottom">
-                    <p className="vol-ecard-field-label">NAME</p>
-                    <h2 className="vol-ecard-name">{formData.name.toUpperCase()}</h2>
-                    <p className="vol-ecard-field-label" style={{marginTop:'14px'}}>VOLUNTEER ID</p>
-                    <p className="vol-ecard-id-value">{volunteerId}</p>
                     <p className="vol-ecard-website">blueshadowsfoundations.org</p>
                   </div>
                 </div>

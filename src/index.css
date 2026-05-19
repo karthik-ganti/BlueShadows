@@ -4097,6 +4097,143 @@ a.contact-card-link:hover {
 }
 
 /* ===================================================================
+   VOLUNTEER E-CARD SYSTEM
+=================================================================== */
+
+.vol-ecard {
+  width: 320px;
+  margin: 20px auto 12px;
+  background: linear-gradient(160deg, #0a1628 0%, #0f2347 55%, #1a3a6b 100%);
+  border-radius: 20px;
+  padding: 32px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.vol-ecard::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.vol-ecard::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: -40px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.vol-ecard-logo img {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.vol-ecard-org {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+.vol-ecard-website {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 0 4px;
+  letter-spacing: 0.5px;
+}
+
+.vol-ecard-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 12px 0;
+}
+
+.vol-ecard-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: #60a5fa;
+  text-transform: uppercase;
+  margin: 4px 0 14px;
+}
+
+.vol-ecard-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 14px;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+.vol-ecard-id {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.14);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  border-radius: 6px;
+  padding: 4px 12px;
+  margin: 0 0 7px;
+}
+
+.vol-ecard-date {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.vol-ecard-tagline {
+  font-size: 0.76rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 6px 0 0;
+  line-height: 1.5;
+}
+
+.vol-download-btn {
+  width: 100%;
+  padding: 13px;
+  margin-top: 4px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  transition: all 0.2s ease;
+}
+
+.vol-download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(59, 130, 246, 0.5);
+}
+
+/* ===================================================================
    PREMIUM DONATION PAGE — Dark Glass Redesign
    Pure CSS overrides — zero JSX changes
 =================================================================== */

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -11,6 +11,9 @@ function Volunteer() {
   const [submitting, setSubmitting] = useState(false)
   const [formData, setFormData] = useState({ name: '', phone: '', address: '' })
   const [errors, setErrors] = useState({})
+  const [volunteerId, setVolunteerId] = useState('')
+  const [joinDate, setJoinDate] = useState('')
+  const eCardRef = useRef(null)
 
   useEffect(() => {
     document.body.style.overflow = showForm ? 'hidden' : ''
@@ -38,10 +41,18 @@ function Volunteer() {
     if (!validate()) return
     setSubmitting(true)
     try {
+      const year = new Date().getFullYear()
+      const rand = Math.floor(10000 + Math.random() * 90000)
+      const id = `BSF-VOL-${year}-${rand}`
+      const date = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' })
+      setVolunteerId(id)
+      setJoinDate(date)
+
       const payload = JSON.stringify({
         name: formData.name.trim(),
         phone: formData.phone.trim(),
         address: formData.address.trim(),
+        volunteerId: id,
         timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
       })
       await fetch(VOLUNTEER_SHEET_URL, {
@@ -63,6 +74,18 @@ function Volunteer() {
     setFormStep(1)
     setFormData({ name: '', phone: '', address: '' })
     setErrors({})
+    setVolunteerId('')
+    setJoinDate('')
+  }
+
+  const handleDownloadCard = async () => {
+    if (!eCardRef.current) return
+    const html2canvas = (await import('html2canvas')).default
+    const canvas = await html2canvas(eCardRef.current, { scale: 2, useCORS: true, backgroundColor: null })
+    const link = document.createElement('a')
+    link.download = `BlueShadows-Volunteer-${volunteerId}.png`
+    link.href = canvas.toDataURL('image/png')
+    link.click()
   }
 
   return (
@@ -305,21 +328,28 @@ function Volunteer() {
                     <path d="M35 60 L52 77 L85 44" fill="none" stroke="#38a169" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" className="vol-checkmark-path" />
                   </svg>
                 </div>
-                <div className="vol-form-logo">
-                  <img src="logo.jpg" alt="Blue Shadows Foundation" />
+                <h2 className="vol-success-title">Welcome, {formData.name}! 🎉</h2>
+                <p className="vol-success-msg">Your volunteer registration is confirmed. Here is your official e-card!</p>
+
+                {/* E-Card */}
+                <div className="vol-ecard" ref={eCardRef}>
+                  <div className="vol-ecard-logo">
+                    <img src="logo.jpg" alt="Blue Shadows Foundation" crossOrigin="anonymous" />
+                  </div>
+                  <h3 className="vol-ecard-org">Blue Shadows Foundation</h3>
+                  <p className="vol-ecard-website">blueshadowsfoundations.org</p>
+                  <div className="vol-ecard-divider" />
+                  <p className="vol-ecard-badge">✦ OFFICIAL VOLUNTEER ✦</p>
+                  <h2 className="vol-ecard-name">{formData.name}</h2>
+                  <p className="vol-ecard-id">ID : {volunteerId}</p>
+                  <p className="vol-ecard-date">Joined : {joinDate}</p>
+                  <div className="vol-ecard-divider" />
+                  <p className="vol-ecard-tagline">"Bringing light to those living in the shadows."</p>
                 </div>
-                <h2 className="vol-success-title">Thank You, {formData.name}! 🎉</h2>
-                <p className="vol-success-msg">
-                  Your volunteer registration has been received successfully. Welcome to the Blue Shadows family!
-                </p>
-                <p className="vol-success-note">
-                  Our team will reach out to you at <strong>{formData.phone}</strong> within 48 hours to get you started.
-                </p>
-                <div className="vol-success-summary">
-                  <div className="vol-summary-row"><span>Name</span><span>{formData.name}</span></div>
-                  <div className="vol-summary-row"><span>Phone</span><span>{formData.phone}</span></div>
-                  <div className="vol-summary-row"><span>Address</span><span>{formData.address}</span></div>
-                </div>
+
+                <button className="vol-download-btn" onClick={handleDownloadCard}>
+                  ⬇ Download E-Card
+                </button>
                 <button className="vol-done-btn" onClick={handleCloseForm}>Done ✓</button>
               </div>
             )}

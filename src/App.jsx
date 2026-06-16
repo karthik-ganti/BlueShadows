@@ -286,6 +286,11 @@ function Home() {
                 allowFullScreen>
               </iframe>
             </div>
+            <div className="video-container">
+              <video controls preload="metadata" playsInline>
+                <source src="impact-story-4.mp4" type="video/mp4" />
+              </video>
+            </div>
           </div>
         </div>
       </section>

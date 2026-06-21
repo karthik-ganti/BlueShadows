@@ -93,7 +93,7 @@ function Volunteer() {
         <title>Volunteer | Blue Shadows Foundation</title>
         <meta name="description" content="Volunteer with Blue Shadows Foundation and help bring care, education, and hope to underserved communities in rural Andhra Pradesh." />
         <meta property="og:title" content="Volunteer With Blue Shadows Foundation" />
-        <meta property="og:url" content="https://blueshadowsfoundations.org/#/volunteer" />
+        <meta property="og:url" content="https://blueshadowsfoundation.org/#/volunteer" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <Navbar />

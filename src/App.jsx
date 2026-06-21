@@ -167,8 +167,8 @@ function Home() {
         <meta name="description" content="Blue Shadows Foundation is an NGO in Andhra Pradesh dedicated to free medical camps, education support, food distribution, and community empowerment in rural India." />
         <meta property="og:title" content="Blue Shadows Foundation | Lighting Lives Through Care" />
         <meta property="og:description" content="Join us in bringing hope and care to those living in the shadows. Donate, volunteer, or spread the word." />
-        <meta property="og:image" content="https://blueshadowsfoundations.org/logo.jpg" />
-        <meta property="og:url" content="https://blueshadowsfoundations.org" />
+        <meta property="og:image" content="https://blueshadowsfoundation.org/logo.jpg" />
+        <meta property="og:url" content="https://blueshadowsfoundation.org" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <Navbar />

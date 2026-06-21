@@ -10,7 +10,7 @@ function Founders() {
         <title>Our Founders &amp; Team | Blue Shadows Foundation</title>
         <meta name="description" content="Meet the founders and core team behind Blue Shadows Foundation — young changemakers dedicated to healthcare, education, and community service in Andhra Pradesh." />
         <meta property="og:title" content="Founders &amp; Team | Blue Shadows Foundation" />
-        <meta property="og:url" content="https://blueshadowsfoundations.org/#/founders" />
+        <meta property="og:url" content="https://blueshadowsfoundation.org/#/founders" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <Navbar />

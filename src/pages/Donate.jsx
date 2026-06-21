@@ -145,7 +145,7 @@ function Donate() {
         <meta name="description" content="Make a donation to Blue Shadows Foundation. Support free medical camps, education, food distribution, and community development in rural Andhra Pradesh." />
         <meta property="og:title" content="Donate to Blue Shadows Foundation" />
         <meta property="og:description" content="Your contribution brings hope and light to those living in the shadows." />
-        <meta property="og:url" content="https://blueshadowsfoundations.org/#/donate" />
+        <meta property="og:url" content="https://blueshadowsfoundation.org/#/donate" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <Navbar />

@@ -89,10 +89,10 @@ export default function Campaign() {
     return () => clearInterval(t)
   }, [])
 
-  const shareText = `🏠 Help Blue Shadows Foundation build a home for a family in need!\n₹${raised.toLocaleString('en-IN')} raised of ₹1,50,000 so far.\nEvery rupee matters 👇\nhttps://blueshadowsfoundations.org/#/campaign`
+  const shareText = `🏠 Help Blue Shadows Foundation build a home for a family in need!\n₹${raised.toLocaleString('en-IN')} raised of ₹1,50,000 so far.\nEvery rupee matters 👇\nhttps://blueshadowsfoundation.org/#/campaign`
 
   const handleCopy = () => {
-    navigator.clipboard.writeText('https://blueshadowsfoundations.org/#/campaign').then(() => {
+    navigator.clipboard.writeText('https://blueshadowsfoundation.org/#/campaign').then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2500)
     })

@@ -5350,3 +5350,250 @@ a.contact-card-link:hover {
   transform: translateY(-2px);
   box-shadow: none;
 }
+
+/* ── TEAM DONATION FORM ──────────────────────────────────────────────────── */
+
+.tf-page {
+  min-height: 100vh;
+  background: #f0f4f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.tf-pin-card,
+.tf-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 460px;
+}
+
+/* PIN screen */
+.tf-pin-logo {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.tf-pin-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.tf-pin-sub {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 28px;
+}
+
+.tf-pin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tf-pin-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  text-align: center;
+  letter-spacing: 4px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.tf-pin-input:focus {
+  border-color: #1e3a5f;
+}
+
+.tf-pin-input--error {
+  border-color: #e53e3e;
+}
+
+.tf-pin-error {
+  color: #e53e3e;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.tf-pin-btn {
+  background: #1e3a5f;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.tf-pin-btn:hover {
+  background: #2c5282;
+  transform: translateY(-1px);
+}
+
+/* Form header */
+.tf-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.tf-badge {
+  display: inline-block;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.tf-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin-bottom: 4px;
+}
+
+.tf-sub {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* Form fields */
+.tf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.tf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tf-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.tf-req {
+  color: #e53e3e;
+}
+
+.tf-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #f8fafc;
+}
+
+.tf-input:focus {
+  border-color: #1e3a5f;
+  background: #fff;
+}
+
+.tf-error {
+  color: #e53e3e;
+  font-size: 0.83rem;
+  text-align: center;
+  padding: 8px 12px;
+  background: #fff5f5;
+  border-radius: 8px;
+  border: 1px solid #fed7d7;
+}
+
+.tf-submit-btn {
+  width: 100%;
+  background: #1e3a5f;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 4px;
+}
+
+.tf-submit-btn:hover:not(:disabled) {
+  background: #2c5282;
+  transform: translateY(-1px);
+}
+
+.tf-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Success screen */
+.tf-success-icon {
+  width: 64px;
+  height: 64px;
+  background: #38a169;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 auto 16px;
+}
+
+.tf-success-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.tf-success-sub {
+  text-align: center;
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.tf-sheet-link {
+  display: block;
+  text-align: center;
+  color: #2c5282;
+  font-size: 0.88rem;
+  margin-top: 12px;
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .tf-pin-card,
+  .tf-card {
+    padding: 28px 20px;
+  }
+}

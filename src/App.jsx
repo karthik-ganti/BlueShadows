@@ -8,6 +8,7 @@ import Founders from './pages/Founders'
 import Donate from './pages/Donate'
 import Volunteer from './pages/Volunteer'
 import Campaign from './pages/Campaign'
+import TeamForm from './pages/TeamForm'
 
 // ─── Impact Stats Counter ────────────────────────────────────────────────────
 
@@ -112,7 +113,7 @@ function FAQ() {
 
 // ─── Campaign Banner ─────────────────────────────────────────────────────────
 
-const CAMPAIGN_API = 'https://script.google.com/macros/s/AKfycbyTk0DIAD9NTE9H2FHGc907Cx7-wJO386czvjDEEzRveQz2TdItgy7jkqU_EuRmC9SBCg/exec'
+const CAMPAIGN_API = 'https://script.google.com/macros/s/AKfycbwytsU37YX8_4KzBEbMwKvknOGyZRKzscNh3YStqzBu7sJkvsM-RinH-VK2cdQA6uzrhA/exec'
 
 function CampaignBanner() {
   const [raised, setRaised] = useState(null)
@@ -416,6 +417,7 @@ function App() {
         <Route path="/donate" element={<Donate />} />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/campaign" element={<Campaign />} />
+        <Route path="/team" element={<TeamForm />} />
       </Routes>
     </Router>
   )

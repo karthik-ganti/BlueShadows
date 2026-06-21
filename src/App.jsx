@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import './index.css'
@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import Founders from './pages/Founders'
 import Donate from './pages/Donate'
 import Volunteer from './pages/Volunteer'
+import Campaign from './pages/Campaign'
 
 // ─── Impact Stats Counter ────────────────────────────────────────────────────
 
@@ -109,6 +110,42 @@ function FAQ() {
   )
 }
 
+// ─── Campaign Banner ─────────────────────────────────────────────────────────
+
+const CAMPAIGN_API = 'https://script.google.com/macros/s/AKfycbyTk0DIAD9NTE9H2FHGc907Cx7-wJO386czvjDEEzRveQz2TdItgy7jkqU_EuRmC9SBCg/exec'
+
+function CampaignBanner() {
+  const [raised, setRaised] = useState(null)
+  const [visible, setVisible] = useState(() => sessionStorage.getItem('campaign-banner-closed') !== '1')
+
+  useEffect(() => {
+    if (!visible) return
+    const cached = sessionStorage.getItem('campaign-raised')
+    if (cached) setRaised(Number(cached))
+    fetch(CAMPAIGN_API)
+      .then(r => r.json())
+      .then(d => { setRaised(d.raised || 0); sessionStorage.setItem('campaign-raised', String(d.raised || 0)) })
+      .catch(() => {})
+  }, [visible])
+
+  if (!visible) return null
+
+  return (
+    <div className="campaign-banner">
+      <span className="campaign-banner-text">
+        🏠 <strong>URGENT:</strong> Help build a home for a family in need —{' '}
+        {raised !== null ? `₹${raised.toLocaleString('en-IN')} / ₹1,50,000 raised` : 'Campaign live now'}
+      </span>
+      <Link to="/campaign" className="campaign-banner-link">See Campaign →</Link>
+      <button
+        className="campaign-banner-close"
+        onClick={() => { setVisible(false); sessionStorage.setItem('campaign-banner-closed', '1') }}
+        aria-label="Close banner"
+      >×</button>
+    </div>
+  )
+}
+
 // ─── Home Page ───────────────────────────────────────────────────────────────
 
 function Home() {
@@ -135,6 +172,7 @@ function Home() {
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <Navbar />
+      <CampaignBanner />
 
       {/* Hero Section */}
       <section className="hero" id="home">
@@ -377,6 +415,7 @@ function App() {
         <Route path="/founders" element={<Founders />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/volunteer" element={<Volunteer />} />
+        <Route path="/campaign" element={<Campaign />} />
       </Routes>
     </Router>
   )

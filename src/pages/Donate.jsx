@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { QRCodeSVG } from 'qrcode.react'
 import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
@@ -12,14 +13,17 @@ const UPI_ID = '82537301@ubin'
 const INDIAN_PHONE_RE = /^[6-9]\d{9}$/
 
 function Donate() {
+  const location = useLocation()
+  const prefill = location.state || {}
+
   const [showBankDetails, setShowBankDetails] = useState(false)
   const [phoneError, setPhoneError] = useState('')
   const [step, setStep] = useState(1)
   const [citizenType, setCitizenType] = useState('indian')
   const [frequency, setFrequency] = useState('onetime')
-  const [amount, setAmount] = useState('')
-  const [selectedAmount, setSelectedAmount] = useState(null)
-  const [cause, setCause] = useState('')
+  const [amount, setAmount] = useState(prefill.amount || '')
+  const [selectedAmount, setSelectedAmount] = useState(prefill.amount || null)
+  const [cause, setCause] = useState(prefill.cause || '')
   const [donorName, setDonorName] = useState('')
   const [donorPhone, setDonorPhone] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -31,6 +35,7 @@ function Donate() {
     : ['500', '1000', '2000', '5000', '10000', '20000']
 
   const causes = [
+    'House Construction — Build a Home',
     'Medical Camps',
     'Education Support',
     'Food Distribution',

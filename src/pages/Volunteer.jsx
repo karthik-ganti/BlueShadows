@@ -332,40 +332,27 @@ function Volunteer() {
 
                 {/* E-Card */}
                 <div className="vol-ecard" ref={eCardRef}>
-                  {/* Header */}
-                  <div className="vol-ecard-header">
-                    Blue Shadows Foundation &nbsp;|&nbsp; Volunteer e Card
-                  </div>
+                  <div className="vol-ecard-header">Volunteer | e Card</div>
 
-                  {/* Single gradient body */}
                   <div className="vol-ecard-body">
-                    <img src="logo.jpg" className="vol-ecard-watermark" alt="" aria-hidden="true" crossOrigin="anonymous" />
-
-                    <p className="vol-ecard-field-label">NAME</p>
-                    <h2 className="vol-ecard-name">{formData.name.toUpperCase()}</h2>
-                    <p className="vol-ecard-field-label vol-ecard-field-label--gap">ID</p>
-                    <p className="vol-ecard-id-value">{volunteerId}</p>
-
-                    <div className="vol-ecard-circle">
-                      <img src="logo.jpg" alt="Blue Shadows Foundation" crossOrigin="anonymous" />
+                    <div className="vol-ecard-gradient-section">
+                      <div className="vol-ecard-logo-circle">
+                        <img src="logo.jpg" alt="Blue Shadows Foundation" crossOrigin="anonymous" />
+                      </div>
                     </div>
 
-                    <p className="vol-ecard-org-sub">BLUE SHADOWS FOUNDATION</p>
-                    <p className="vol-ecard-volunteer-label">VOLUNTEER</p>
+                    <div className="vol-ecard-content">
+                      <div className="vol-ecard-label">NAME</div>
+                      <div className="vol-ecard-name">{formData.name.toUpperCase()}</div>
 
-                    <div className="vol-ecard-logo-icon">
-                      <img src="logo.jpg" alt="" crossOrigin="anonymous" aria-hidden="true" />
+                      <div className="vol-ecard-label vol-ecard-id-label">ID</div>
+                      <div className="vol-ecard-id-number">{volunteerId}</div>
+
+                      <div className="vol-ecard-foundation">BLUE SHADOWS FOUNDATION</div>
+                      <div className="vol-ecard-volunteer">VOLUNTEER</div>
+
+                      <div className="vol-ecard-footer">Blueshadowsfoundation.org</div>
                     </div>
-
-                    <p className="vol-ecard-tagline">"Bringing light to those living in the shadows."</p>
-                  </div>
-
-                  {/* Wave + footer */}
-                  <svg className="vol-ecard-wave-svg" viewBox="0 0 320 36" preserveAspectRatio="none">
-                    <path d="M0,36 Q80,4 160,22 Q240,40 320,8 L320,36 Z" fill="#0B5ED7" />
-                  </svg>
-                  <div className="vol-ecard-footer">
-                    <p className="vol-ecard-website">blueshadowsfoundation.org</p>
                   </div>
                 </div>
 

@@ -232,7 +232,7 @@ export default function Campaign() {
           <p className="campaign-section-sub">Sharing takes 5 seconds and can bring in thousands of rupees.</p>
           <div className="share-row">
             <a
-              href={`https://wa.me/?text=${encodeURIComponent(shareText)}`}
+              href={`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="share-btn share-btn--whatsapp"

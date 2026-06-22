@@ -35,22 +35,22 @@ export default function TeamForm() {
     setSubmitting(true)
     setError('')
 
-    const payload = JSON.stringify({
+    const params = new URLSearchParams({
+      action: 'log',
       name: name.trim(),
       phone: phone.trim(),
       amount: Number(amount),
-      purpose: 'House Construction — Build a Home',
       timestamp: `${date} — TxnID: ${txnId.trim() || 'N/A'}`
     })
 
     try {
-      await fetch(CAMPAIGN_API, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: payload
-      })
-      setSubmitted(true)
+      const res = await fetch(`${CAMPAIGN_API}?${params.toString()}`)
+      const data = await res.json()
+      if (data.status === 'ok') {
+        setSubmitted(true)
+      } else {
+        setError('Sheet returned an unexpected response. Try again.')
+      }
     } catch {
       setError('Network error. Check your connection and try again.')
     }

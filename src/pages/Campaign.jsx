@@ -135,10 +135,6 @@ export default function Campaign() {
               Donate Now — Help Build Their Home
             </Link>
           </div>
-          <div className="campaign-hero-image">
-            <img src="campaign-family.jpeg" alt="Family in need of a home" loading="lazy"
-              onError={e => { e.currentTarget.style.display = 'none' }} />
-          </div>
         </div>
       </section>
 
@@ -185,26 +181,24 @@ export default function Campaign() {
       <section className="campaign-section">
         <div className="container">
           <h2 className="section-title">Their Story</h2>
-          <div className="campaign-story-grid">
-            <div className="campaign-story-text">
-              <p className="campaign-story-para">
-                She lost her husband unexpectedly, leaving her alone to raise their two young children
-                with no stable income and no roof she could truly call safe. Every monsoon brings
-                dread, every summer brings exhaustion — yet she has held her family together with
-                nothing but courage and determination.
-              </p>
-              <p className="campaign-story-para">
-                Blue Shadows Foundation met her during one of our community outreach camps. Her
-                strength moved us deeply, and we made a promise — to build her a home where her
-                children can grow up with safety, dignity, and hope. With your support, we will
-                keep that promise, one brick at a time.
-              </p>
-              <blockquote className="campaign-family-quote">
-                "I never thought anyone would come forward for us. I just want my children to have
-                a safe place to sleep. That is all I have ever wished for."
-                <cite>— A mother of two</cite>
-              </blockquote>
-            </div>
+          <div className="campaign-story-single">
+            <p className="campaign-story-para">
+              She lost her husband unexpectedly, leaving her alone to raise their two young children
+              with no stable income and no roof she could truly call safe. Every monsoon brings
+              dread, every summer brings exhaustion — yet she has held her family together with
+              nothing but courage and determination.
+            </p>
+            <p className="campaign-story-para">
+              Blue Shadows Foundation met her during one of our community outreach camps. Her
+              strength moved us deeply, and we made a promise — to build her a home where her
+              children can grow up with safety, dignity, and hope. With your support, we will
+              keep that promise, one brick at a time.
+            </p>
+            <blockquote className="campaign-family-quote">
+              "I never thought anyone would come forward for us. I just want my children to have
+              a safe place to sleep. That is all I have ever wished for."
+              <cite>— A mother of two</cite>
+            </blockquote>
             <div className="campaign-story-photo">
               <img src="campaign-family.jpeg" alt="The family we are helping" loading="lazy"
                 onError={e => { e.currentTarget.style.display = 'none' }} />

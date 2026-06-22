@@ -8,11 +8,12 @@ const GOAL = 150000
 const CAMPAIGN_API = 'https://script.google.com/macros/s/AKfycbwtk5EmdEQ9AWa6H7zWm9O-727byuU_jANrjdXtvA8yRKZl6-F0e-jEy8uGQBoEthjM_w/exec'
 
 const TIERS = [
-  { amount: 500,   icon: '🧱', label: '50 Bricks',                desc: 'Every brick counts toward a stronger foundation.' },
-  { amount: 2000,  icon: '🪨', label: 'Cement + Sand',            desc: 'One full bag of cement and sand for the walls.' },
-  { amount: 3000,  icon: '👷', label: 'Workers Wages',             desc: 'Pay a day\'s wage for the skilled workers building this home.' },
-  { amount: 40000, icon: '🏗️', label: 'Roofing Material',         desc: 'A roof over their heads — protection from sun and rain.' },
-  { amount: 20000, icon: '⚡', label: 'Electrical Wiring',        desc: 'Power and lighting for the entire home.' },
+  { amount: 20000, icon: '🧱', label: 'Bricks',                          desc: 'Supply bricks to build strong, solid walls for the home.' },
+  { amount: 2000,  icon: '🪨', label: '10 Bricks + 1 Cement Bag + 2 Sand Bags', desc: 'Essential raw materials to lay the foundation of the walls.' },
+  { amount: 3000,  icon: '👷', label: 'Workers Wages',                    desc: 'Pay a day\'s wage for the skilled workers building this home.' },
+  { amount: 15000, icon: '🚿', label: 'Bathroom',                         desc: 'Build a complete bathroom — dignity and sanitation for the family.' },
+  { amount: 40000, icon: '🏗️', label: 'Roofing Material',                desc: 'A roof over their heads — protection from sun and rain.' },
+  { amount: 15000, icon: '⚡', label: 'Electrical Wiring',               desc: 'Power and lighting for the entire home.' },
 ]
 
 const UPDATES = [

@@ -4588,8 +4588,8 @@ a.contact-card-link:hover {
   width: 100%;
   border-radius: 14px;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
-  object-fit: cover;
-  max-height: 380px;
+  object-fit: contain;
+  display: block;
 }
 
 /* Donor Wall */

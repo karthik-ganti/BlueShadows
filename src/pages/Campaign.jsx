@@ -10,7 +10,7 @@ const CAMPAIGN_API = 'https://script.google.com/macros/s/AKfycbwytsU37YX8_4KzBEb
 const TIERS = [
   { amount: 500,   icon: '🧱', label: '50 Bricks',                desc: 'Every brick counts toward a stronger foundation.' },
   { amount: 2000,  icon: '🪨', label: 'Cement + Sand',            desc: 'One full bag of cement and sand for the walls.' },
-  { amount: 5000,  icon: '🪟', label: 'Windows & Ventilation',    desc: 'Let in light and fresh air for the family.' },
+  { amount: 3000,  icon: '👷', label: 'Workers Wages',             desc: 'Pay a day\'s wage for the skilled workers building this home.' },
   { amount: 40000, icon: '🏗️', label: 'Roofing Material',         desc: 'A roof over their heads — protection from sun and rain.' },
   { amount: 20000, icon: '⚡', label: 'Electrical Wiring',        desc: 'Power and lighting for the entire home.' },
 ]

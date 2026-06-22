@@ -11,8 +11,8 @@ const TIERS = [
   { amount: 500,   icon: '🧱', label: '50 Bricks',                desc: 'Every brick counts toward a stronger foundation.' },
   { amount: 2000,  icon: '🪨', label: 'Cement + Sand',            desc: 'One full bag of cement and sand for the walls.' },
   { amount: 5000,  icon: '🪟', label: 'Windows & Ventilation',    desc: 'Let in light and fresh air for the family.' },
-  { amount: 10000, icon: '🏗️', label: 'Roofing Material',         desc: 'A roof over their heads — protection from sun and rain.' },
-  { amount: 25000, icon: '⚡', label: 'Electrical Wiring',        desc: 'Power and lighting for the entire home.' },
+  { amount: 40000, icon: '🏗️', label: 'Roofing Material',         desc: 'A roof over their heads — protection from sun and rain.' },
+  { amount: 20000, icon: '⚡', label: 'Electrical Wiring',        desc: 'Power and lighting for the entire home.' },
 ]
 
 const UPDATES = [

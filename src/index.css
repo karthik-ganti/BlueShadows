@@ -4242,7 +4242,7 @@ a.contact-card-link:hover {
 
 /* Banner */
 .campaign-banner {
-  background: linear-gradient(90deg, #d97706, #f59e0b);
+  background: linear-gradient(90deg, #1e3a5f, #2c5282);
   color: #1c1917;
   display: flex;
   align-items: center;
@@ -4263,8 +4263,8 @@ a.contact-card-link:hover {
 }
 
 .campaign-banner-link {
-  background: #1c1917;
-  color: #fef3c7;
+  background: #fff;
+  color: #1e3a5f;
   padding: 6px 16px;
   border-radius: 20px;
   font-weight: 700;
@@ -4275,7 +4275,7 @@ a.contact-card-link:hover {
 }
 
 .campaign-banner-link:hover {
-  background: #000;
+  background: #e6f2ff;
 }
 
 .campaign-banner-close {
@@ -4292,7 +4292,7 @@ a.contact-card-link:hover {
 
 /* Hero */
 .campaign-hero {
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 40%, #fde68a 100%);
+  background: linear-gradient(135deg, #e6f2ff 0%, #c3dafe 40%, #a3bffa 100%);
   padding: 80px 20px 60px;
 }
 
@@ -4305,7 +4305,7 @@ a.contact-card-link:hover {
 
 .campaign-urgent-badge {
   display: inline-block;
-  background: #dc2626;
+  background: #1e3a5f;
   color: #fff;
   font-family: 'Poppins', sans-serif;
   font-size: 0.75rem;
@@ -4321,7 +4321,7 @@ a.contact-card-link:hover {
   font-family: 'Playfair Display', serif;
   font-size: 2.8rem;
   font-weight: 700;
-  color: #92400e;
+  color: #1e3a5f;
   line-height: 1.2;
   margin: 0 0 16px;
 }
@@ -4329,7 +4329,7 @@ a.contact-card-link:hover {
 .campaign-subtitle {
   font-family: 'Poppins', sans-serif;
   font-size: 1.05rem;
-  color: #78350f;
+  color: #2c5282;
   line-height: 1.7;
   margin: 0 0 26px;
 }
@@ -4349,19 +4349,19 @@ a.contact-card-link:hover {
   font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
   font-weight: 700;
-  color: #92400e;
+  color: #1e3a5f;
 }
 
 .campaign-hero-stat span {
   font-size: 0.78rem;
-  color: #78350f;
+  color: #2c5282;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .campaign-donate-cta {
   display: inline-block;
-  background: linear-gradient(135deg, #b45309, #d97706);
+  background: linear-gradient(135deg, #1e3a5f, #2c5282);
   color: #fff;
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
@@ -4369,13 +4369,13 @@ a.contact-card-link:hover {
   padding: 16px 32px;
   border-radius: 12px;
   text-decoration: none;
-  box-shadow: 0 6px 20px rgba(180, 83, 9, 0.35);
+  box-shadow: 0 6px 20px rgba(30, 58, 95, 0.35);
   transition: all 0.2s ease;
 }
 
 .campaign-donate-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(180, 83, 9, 0.45);
+  box-shadow: 0 10px 28px rgba(30, 58, 95, 0.45);
 }
 
 .campaign-hero-image img {
@@ -4424,7 +4424,7 @@ a.contact-card-link:hover {
   font-family: 'Playfair Display', serif;
   font-size: 2.6rem;
   font-weight: 700;
-  color: #b45309;
+  color: #1e3a5f;
 }
 
 .campaign-goal {
@@ -4445,7 +4445,7 @@ a.contact-card-link:hover {
 
 .campaign-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #b45309, #f59e0b);
+  background: linear-gradient(90deg, #1e3a5f, #3182ce);
   border-radius: 99px;
   transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -4458,7 +4458,7 @@ a.contact-card-link:hover {
 .campaign-pct {
   font-family: 'Poppins', sans-serif;
   font-size: 0.88rem;
-  color: #b45309;
+  color: #1e3a5f;
   font-weight: 600;
 }
 
@@ -4481,7 +4481,7 @@ a.contact-card-link:hover {
 .campaign-tier-card {
   background: #fff;
   border: 1px solid #e5e7eb;
-  border-left: 4px solid #f59e0b;
+  border-left: 4px solid #3182ce;
   border-radius: 12px;
   padding: 24px 20px;
   width: 200px;
@@ -4507,7 +4507,7 @@ a.contact-card-link:hover {
   font-family: 'Playfair Display', serif;
   font-size: 1.3rem;
   font-weight: 700;
-  color: #b45309;
+  color: #1e3a5f;
   margin-bottom: 4px;
 }
 
@@ -4531,7 +4531,7 @@ a.contact-card-link:hover {
 .campaign-tier-btn {
   display: block;
   width: 100%;
-  background: linear-gradient(135deg, #b45309, #d97706);
+  background: linear-gradient(135deg, #1e3a5f, #2c5282);
   color: #fff;
   font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
@@ -4584,14 +4584,14 @@ a.contact-card-link:hover {
 }
 
 .campaign-family-quote {
-  border-left: 4px solid #f59e0b;
+  border-left: 4px solid #3182ce;
   padding: 16px 20px;
   margin: 24px 0 0;
-  background: #fffbeb;
+  background: #e6f2ff;
   border-radius: 0 12px 12px 0;
   font-family: 'Playfair Display', serif;
   font-size: 1.05rem;
-  color: #78350f;
+  color: #1e3a5f;
   font-style: italic;
 }
 
@@ -4601,7 +4601,7 @@ a.contact-card-link:hover {
   font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-style: normal;
-  color: #92400e;
+  color: #2c5282;
   font-weight: 600;
 }
 
@@ -4636,9 +4636,9 @@ a.contact-card-link:hover {
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #92400e;
-  background: #fef3c7;
-  border: 1px solid #fde68a;
+  color: #1e3a5f;
+  background: #e6f2ff;
+  border: 1px solid #bee3f8;
   border-radius: 99px;
   padding: 6px 20px;
   margin-right: 14px;
@@ -4646,7 +4646,7 @@ a.contact-card-link:hover {
 }
 
 .donor-ticker-heart {
-  color: #f59e0b;
+  color: #3182ce;
 }
 
 @keyframes donor-scroll {
@@ -4750,7 +4750,7 @@ a.contact-card-link:hover {
 
 /* Final CTA */
 .campaign-final-cta {
-  background: linear-gradient(135deg, #92400e, #b45309, #d97706);
+  background: linear-gradient(135deg, #1e3a5f, #2c5282, #3182ce);
   padding: 70px 20px;
   text-align: center;
   color: #fff;
@@ -4772,12 +4772,12 @@ a.contact-card-link:hover {
 
 .campaign-final-cta .campaign-donate-cta {
   background: #fff;
-  color: #92400e;
+  color: #1e3a5f;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .campaign-final-cta .campaign-donate-cta:hover {
-  background: #fef3c7;
+  background: #e6f2ff;
 }
 
 /* Navbar campaign link */

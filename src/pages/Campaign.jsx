@@ -114,8 +114,8 @@ export default function Campaign() {
             <span className="campaign-urgent-badge">🏠 URGENT CAMPAIGN</span>
             <h1 className="campaign-title">Help Us Build a<br />Home for Hope</h1>
             <p className="campaign-subtitle">
-              A family in our community has been living without a proper roof for years.
-              Together, we can change that — one brick at a time.
+              A mother who lost her husband is raising her two children alone, without a safe roof
+              over their heads. Together, we can change that — one brick at a time.
             </p>
             <div className="campaign-hero-stats">
               <div className="campaign-hero-stat">
@@ -188,20 +188,21 @@ export default function Campaign() {
           <div className="campaign-story-grid">
             <div className="campaign-story-text">
               <p className="campaign-story-para">
-                This family has been living in a deteriorating shelter for years, facing every monsoon
-                with fear and every summer with exhaustion. The father works as a daily wage labourer
-                and the mother looks after three young children. Despite their resilience, they have
-                been unable to save enough to build even the most basic of homes.
+                She lost her husband unexpectedly, leaving her alone to raise their two young children
+                with no stable income and no roof she could truly call safe. Every monsoon brings
+                dread, every summer brings exhaustion — yet she has held her family together with
+                nothing but courage and determination.
               </p>
               <p className="campaign-story-para">
-                Blue Shadows Foundation identified this family during one of our community outreach
-                camps. With your support, we will construct a solid, dignified home — giving them
-                safety, stability, and a foundation to build their lives on.
+                Blue Shadows Foundation met her during one of our community outreach camps. Her
+                strength moved us deeply, and we made a promise — to build her a home where her
+                children can grow up with safety, dignity, and hope. With your support, we will
+                keep that promise, one brick at a time.
               </p>
               <blockquote className="campaign-family-quote">
-                "We never imagined anyone would come forward to help us build a home. We are
-                overwhelmed with gratitude."
-                <cite>— The Family</cite>
+                "I never thought anyone would come forward for us. I just want my children to have
+                a safe place to sleep. That is all I have ever wished for."
+                <cite>— A mother of two</cite>
               </blockquote>
             </div>
             <div className="campaign-story-photo">

@@ -44,13 +44,8 @@ export default function TeamForm() {
     })
 
     try {
-      const res = await fetch(`${CAMPAIGN_API}?${params.toString()}`)
-      const data = await res.json()
-      if (data.status === 'ok') {
-        setSubmitted(true)
-      } else {
-        setError('Sheet returned an unexpected response. Try again.')
-      }
+      await fetch(`${CAMPAIGN_API}?${params.toString()}`, { mode: 'no-cors' })
+      setSubmitted(true)
     } catch {
       setError('Network error. Check your connection and try again.')
     }
@@ -101,8 +96,8 @@ export default function TeamForm() {
           <div className="tf-success-icon">✓</div>
           <h2 className="tf-success-title">Donation Logged!</h2>
           <p className="tf-success-sub">
-            <strong>{name}</strong> — ₹{Number(amount).toLocaleString('en-IN')} has been added to the Google Sheet.
-            The campaign progress bar will update within 60 seconds.
+            <strong>{name}</strong> — ₹{Number(amount).toLocaleString('en-IN')} has been sent to the Google Sheet.
+            Open the sheet to confirm the row was added, then the campaign bar updates within 60 seconds.
           </p>
           <button className="tf-submit-btn" onClick={handleAnother}>Log Another Donation</button>
           <a

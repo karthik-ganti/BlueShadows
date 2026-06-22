@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const CAMPAIGN_API = 'https://script.google.com/macros/s/AKfycbwytsU37YX8_4KzBEbMwKvknOGyZRKzscNh3YStqzBu7sJkvsM-RinH-VK2cdQA6uzrhA/exec'
+const CAMPAIGN_API = 'https://script.google.com/macros/s/AKfycbwtk5EmdEQ9AWa6H7zWm9O-727byuU_jANrjdXtvA8yRKZl6-F0e-jEy8uGQBoEthjM_w/exec'
 const TEAM_PIN = 'BSF2026'
 
 export default function TeamForm() {

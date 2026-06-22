@@ -216,7 +216,7 @@ export default function Campaign() {
       {donorNames.length > 0 && (
         <section className="campaign-section campaign-section--alt">
           <div className="container">
-            <h2 className="section-title">People Who've Already Helped 💛</h2>
+            <h2 className="section-title">People Who've Already Helped 💙</h2>
           </div>
           <div className="donor-ticker-wrap">
             <div className="donor-ticker">

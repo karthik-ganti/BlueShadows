@@ -136,7 +136,7 @@ export default function Campaign() {
             </Link>
           </div>
           <div className="campaign-hero-image">
-            <img src="campaign-family.jpg" alt="Family in need of a home" loading="lazy"
+            <img src="campaign-family.jpeg" alt="Family in need of a home" loading="lazy"
               onError={e => { e.currentTarget.style.display = 'none' }} />
           </div>
         </div>
@@ -206,7 +206,7 @@ export default function Campaign() {
               </blockquote>
             </div>
             <div className="campaign-story-photo">
-              <img src="campaign-family.jpg" alt="The family we are helping" loading="lazy"
+              <img src="campaign-family.jpeg" alt="The family we are helping" loading="lazy"
                 onError={e => { e.currentTarget.style.display = 'none' }} />
             </div>
           </div>

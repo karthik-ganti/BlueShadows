@@ -217,9 +217,13 @@ export default function Campaign() {
         <section className="campaign-section campaign-section--alt">
           <div className="container">
             <h2 className="section-title">People Who've Already Helped 💛</h2>
-            <div className="donor-pills">
-              {donorNames.map((name, i) => (
-                <span key={i} className="donor-pill">{name}</span>
+          </div>
+          <div className="donor-ticker-wrap">
+            <div className="donor-ticker">
+              {[...donorNames, ...donorNames].map((name, i) => (
+                <span key={i} className="donor-ticker-item">
+                  <span className="donor-ticker-heart">♥</span> {name}
+                </span>
               ))}
             </div>
           </div>

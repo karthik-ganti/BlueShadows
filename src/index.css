@@ -4560,12 +4560,14 @@ a.contact-card-link:hover {
 }
 
 .campaign-story-single .campaign-story-photo {
-  margin-bottom: 32px;
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
 }
 
 .campaign-story-single .campaign-story-photo img {
-  width: 100%;
-  max-height: 480px;
+  width: 260px;
+  height: 300px;
   object-fit: cover;
   object-position: top;
   border-radius: 14px;

@@ -4382,8 +4382,8 @@ a.contact-card-link:hover {
   width: 100%;
   border-radius: 16px;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
-  object-fit: cover;
-  max-height: 420px;
+  object-fit: contain;
+  display: block;
 }
 
 /* Progress */

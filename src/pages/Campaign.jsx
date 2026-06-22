@@ -182,6 +182,10 @@ export default function Campaign() {
         <div className="container">
           <h2 className="section-title">Their Story</h2>
           <div className="campaign-story-single">
+            <div className="campaign-story-photo">
+              <img src="campaign-family.jpeg" alt="The family we are helping" loading="lazy"
+                onError={e => { e.currentTarget.style.display = 'none' }} />
+            </div>
             <p className="campaign-story-para">
               She lost her husband unexpectedly, leaving her alone to raise their two young children
               with no stable income and no roof she could truly call safe. Every monsoon brings
@@ -199,10 +203,6 @@ export default function Campaign() {
               a safe place to sleep. That is all I have ever wished for."
               <cite>— A mother of two</cite>
             </blockquote>
-            <div className="campaign-story-photo">
-              <img src="campaign-family.jpeg" alt="The family we are helping" loading="lazy"
-                onError={e => { e.currentTarget.style.display = 'none' }} />
-            </div>
           </div>
         </div>
       </section>

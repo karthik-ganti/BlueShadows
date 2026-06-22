@@ -203,6 +203,11 @@ export default function Campaign() {
               a safe place to sleep. That is all I have ever wished for."
               <cite>— A mother of two</cite>
             </blockquote>
+            <blockquote className="campaign-family-quote">
+              "When it rains, we are afraid. I dream of a house where me and my brother
+              can study without worrying about the roof. Please help us."
+              <cite>— Her daughter</cite>
+            </blockquote>
           </div>
         </div>
       </section>

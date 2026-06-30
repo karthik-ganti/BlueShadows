@@ -82,6 +82,7 @@ function Founders() {
                 'Nakka Raj Kumar',
                 'Kusuma Rajesh',
                 'Chintha Rajvardhan',
+                'Karipelli Prasanna',
               ].map((name, index, arr) => (
                 <span key={index} className="team-name-item">
                   <span className="team-name-text">{name}</span>

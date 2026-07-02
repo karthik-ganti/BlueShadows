@@ -77,14 +77,36 @@ function Volunteer() {
     setJoinDate('')
   }
 
-  const handleDownloadCard = async () => {
-    if (!eCardRef.current) return
-    const html2canvas = (await import('html2canvas')).default
-    const canvas = await html2canvas(eCardRef.current, { scale: 3, useCORS: true, backgroundColor: null })
-    const link = document.createElement('a')
-    link.download = `BlueShadows-Volunteer-${volunteerId}.png`
-    link.href = canvas.toDataURL('image/png')
-    link.click()
+  const handleDownloadCard = () => {
+    const canvas = document.createElement('canvas')
+    const img = new Image()
+    img.crossOrigin = 'anonymous'
+    img.src = 'id-card-template.png'
+    img.onload = () => {
+      canvas.width = img.naturalWidth
+      canvas.height = img.naturalHeight
+      const ctx = canvas.getContext('2d')
+      const w = img.naturalWidth
+      const h = img.naturalHeight
+
+      ctx.drawImage(img, 0, 0)
+
+      ctx.textAlign = 'center'
+
+      // Volunteer name — below NAME label
+      ctx.fillStyle = '#1a237e'
+      ctx.font = `800 ${Math.round(w * 0.058)}px Poppins, sans-serif`
+      ctx.fillText(formData.name.toUpperCase(), w / 2, h * 0.558)
+
+      // Volunteer ID — below ID label
+      ctx.font = `700 ${Math.round(w * 0.040)}px Poppins, sans-serif`
+      ctx.fillText(volunteerId, w / 2, h * 0.665)
+
+      const link = document.createElement('a')
+      link.download = `BlueShadows-Volunteer-${volunteerId}.png`
+      link.href = canvas.toDataURL('image/png')
+      link.click()
+    }
   }
 
   return (
@@ -330,30 +352,11 @@ function Volunteer() {
                 <h2 className="vol-success-title">Welcome, {formData.name}! 🎉</h2>
                 <p className="vol-success-msg">Your volunteer registration is confirmed. Here is your official e-card!</p>
 
-                {/* E-Card */}
-                <div className="vol-ecard" ref={eCardRef}>
-                  <div className="vol-ecard-header">Volunteer | e Card</div>
-
-                  <div className="vol-ecard-body">
-                    <div className="vol-ecard-gradient-section">
-                      <div className="vol-ecard-logo-circle">
-                        <img src="logo.jpg" alt="Blue Shadows Foundation" crossOrigin="anonymous" />
-                      </div>
-                    </div>
-
-                    <div className="vol-ecard-content">
-                      <div className="vol-ecard-label">NAME</div>
-                      <div className="vol-ecard-name">{formData.name.toUpperCase()}</div>
-
-                      <div className="vol-ecard-label vol-ecard-id-label">ID</div>
-                      <div className="vol-ecard-id-number">{volunteerId}</div>
-
-                      <div className="vol-ecard-foundation">BLUE SHADOWS FOUNDATION</div>
-                      <div className="vol-ecard-volunteer">VOLUNTEER</div>
-
-                      <div className="vol-ecard-footer">Blueshadowsfoundation.org</div>
-                    </div>
-                  </div>
+                {/* E-Card Preview */}
+                <div className="vol-ecard-preview" ref={eCardRef}>
+                  <img src="id-card-template.png" alt="Volunteer ID Card" className="vol-ecard-template-img" />
+                  <div className="vol-ecard-overlay-name">{formData.name.toUpperCase()}</div>
+                  <div className="vol-ecard-overlay-id">{volunteerId}</div>
                 </div>
 
                 <button className="vol-download-btn" onClick={handleDownloadCard}>

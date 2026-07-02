@@ -96,11 +96,11 @@ function Volunteer() {
       // Volunteer name — below NAME label
       ctx.fillStyle = '#1a237e'
       ctx.font = `800 ${Math.round(w * 0.058)}px Poppins, sans-serif`
-      ctx.fillText(formData.name.toUpperCase(), w / 2, h * 0.558)
+      ctx.fillText(formData.name.toUpperCase(), w / 2, h * 0.535)
 
       // Volunteer ID — below ID label
       ctx.font = `700 ${Math.round(w * 0.040)}px Poppins, sans-serif`
-      ctx.fillText(volunteerId, w / 2, h * 0.665)
+      ctx.fillText(volunteerId, w / 2, h * 0.64)
 
       const link = document.createElement('a')
       link.download = `BlueShadows-Volunteer-${volunteerId}.png`

@@ -4118,7 +4118,7 @@ a.contact-card-link:hover {
 
 .vol-ecard-overlay-name {
   position: absolute;
-  top: 54%;
+  top: 43%;
   left: 0;
   right: 0;
   text-align: center;
@@ -4134,7 +4134,7 @@ a.contact-card-link:hover {
 
 .vol-ecard-overlay-id {
   position: absolute;
-  top: 62%;
+  top: 61%;
   left: 0;
   right: 0;
   text-align: center;

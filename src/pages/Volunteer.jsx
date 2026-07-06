@@ -94,7 +94,7 @@ function Volunteer() {
   const drawOnCanvas = useCallback((canvas, download = false) => {
     const templateImg = new Image()
     templateImg.crossOrigin = 'anonymous'
-    templateImg.src = 'member-card-template-landscape.jpeg'
+    templateImg.src = 'member-card.jpeg'
     templateImg.onload = () => {
       canvas.width = templateImg.naturalWidth
       canvas.height = templateImg.naturalHeight
@@ -105,14 +105,14 @@ function Volunteer() {
 
       const finishDraw = () => {
         ctx.textAlign = 'left'
-        ctx.fillStyle = '#1a237e'
-        ctx.font = `700 ${Math.round(w * 0.022)}px Poppins, sans-serif`
-        const xVal = Math.round(w * 0.369)
-        ctx.fillText(volunteerId,         xVal, Math.round(h * 0.570))
-        ctx.fillText(formData.name,       xVal, Math.round(h * 0.651))
-        ctx.fillText(joinDate,            xVal, Math.round(h * 0.733))
-        ctx.fillText('Member',            xVal, Math.round(h * 0.813))
-        ctx.fillText(formData.bloodGroup, xVal, Math.round(h * 0.895))
+        ctx.fillStyle = '#000000'
+        ctx.font = `700 ${Math.round(h * 0.030)}px Poppins, sans-serif`
+        const xVal = Math.round(w * 0.405)
+        ctx.fillText(volunteerId,         xVal, Math.round(h * 0.527))
+        ctx.fillText(formData.name,       xVal, Math.round(h * 0.608))
+        ctx.fillText(joinDate,            xVal, Math.round(h * 0.686))
+        ctx.fillText('General Member',     xVal, Math.round(h * 0.764))
+        ctx.fillText(formData.bloodGroup, xVal, Math.round(h * 0.843))
         if (download) {
           const link = document.createElement('a')
           link.download = `BSF-MemberCard-${volunteerId}.jpeg`
@@ -124,11 +124,11 @@ function Volunteer() {
       if (photoPreview) {
         const photoImg = new Image()
         photoImg.onload = () => {
-          const boxX = Math.round(w * 0.728)
-          const boxY = Math.round(h * 0.058)
-          const boxW = Math.round(w * 0.236)
-          const boxH = Math.round(h * 0.439)
-          const r = Math.round(w * 0.015)
+          const boxX = Math.round(w * 0.756)
+          const boxY = Math.round(h * 0.063)
+          const boxW = Math.round(w * 0.186)
+          const boxH = Math.round(h * 0.352)
+          const r = Math.round(w * 0.013)
           ctx.save()
           ctx.beginPath()
           ctx.moveTo(boxX + r, boxY)

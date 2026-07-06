@@ -137,12 +137,14 @@ function CampaignBanner() {
         🏠 <strong>URGENT:</strong> Help build a home for a family in need —{' '}
         {raised !== null ? `₹${raised.toLocaleString('en-IN')} / ₹1,50,000 raised` : 'Campaign live now'}
       </span>
-      <Link to="/campaign" className="campaign-banner-link">See Campaign →</Link>
-      <button
-        className="campaign-banner-close"
-        onClick={() => { setVisible(false); sessionStorage.setItem('campaign-banner-closed', '1') }}
-        aria-label="Close banner"
-      >×</button>
+      <div className="campaign-banner-actions">
+        <Link to="/campaign" className="campaign-banner-link">See Campaign →</Link>
+        <button
+          className="campaign-banner-close"
+          onClick={() => { setVisible(false); sessionStorage.setItem('campaign-banner-closed', '1') }}
+          aria-label="Close banner"
+        >×</button>
+      </div>
     </div>
   )
 }
@@ -183,7 +185,7 @@ function Home() {
             <p>Blue Shadows Foundation is dedicated to improving lives through free medical camps, education for the underprivileged, social service, and community empowerment.</p>
             <div className="hero-buttons">
               <a href="#/donate" className="cta-button">Donate Now</a>
-              <a href="#/volunteer" className="cta-button secondary">Volunteer With Us</a>
+              <a href="#/volunteer" className="cta-button secondary">Join as a Member</a>
             </div>
           </div>
           <div className="hero-logo-animation">

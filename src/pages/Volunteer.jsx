@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -9,11 +9,12 @@ function Volunteer() {
   const [showForm, setShowForm] = useState(false)
   const [formStep, setFormStep] = useState(1)
   const [submitting, setSubmitting] = useState(false)
-  const [formData, setFormData] = useState({ name: '', phone: '', address: '' })
+  const [formData, setFormData] = useState({ name: '', phone: '', address: '', bloodGroup: '', photo: null })
+  const [photoPreview, setPhotoPreview] = useState(null)
   const [errors, setErrors] = useState({})
   const [volunteerId, setVolunteerId] = useState('')
   const [joinDate, setJoinDate] = useState('')
-  const eCardRef = useRef(null)
+  const memberCardRef = useRef(null)
 
   useEffect(() => {
     document.body.style.overflow = showForm ? 'hidden' : ''
@@ -26,6 +27,8 @@ function Volunteer() {
     if (!formData.phone.trim()) newErrors.phone = 'Phone number is required'
     else if (!/^[0-9]{10}$/.test(formData.phone.trim())) newErrors.phone = 'Enter a valid 10-digit phone number'
     if (!formData.address.trim()) newErrors.address = 'Address is required'
+    if (!formData.bloodGroup) newErrors.bloodGroup = 'Blood group is required'
+    if (!formData.photo) newErrors.photo = 'Please upload your photo'
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -34,6 +37,16 @@ function Volunteer() {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
     if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }))
+  }
+
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+    setFormData(prev => ({ ...prev, photo: file }))
+    const reader = new FileReader()
+    reader.onload = (ev) => setPhotoPreview(ev.target.result)
+    reader.readAsDataURL(file)
+    if (errors.photo) setErrors(prev => ({ ...prev, photo: '' }))
   }
 
   const handleSubmit = async (e) => {
@@ -71,50 +84,94 @@ function Volunteer() {
   const handleCloseForm = () => {
     setShowForm(false)
     setFormStep(1)
-    setFormData({ name: '', phone: '', address: '' })
+    setFormData({ name: '', phone: '', address: '', bloodGroup: '', photo: null })
+    setPhotoPreview(null)
     setErrors({})
     setVolunteerId('')
     setJoinDate('')
   }
 
-  const handleDownloadCard = () => {
-    const canvas = document.createElement('canvas')
-    const img = new Image()
-    img.crossOrigin = 'anonymous'
-    img.src = 'id-card-template.png'
-    img.onload = () => {
-      canvas.width = img.naturalWidth
-      canvas.height = img.naturalHeight
+  const drawOnCanvas = useCallback((canvas, download = false) => {
+    const templateImg = new Image()
+    templateImg.crossOrigin = 'anonymous'
+    templateImg.src = 'member-card-template-landscape.jpeg'
+    templateImg.onload = () => {
+      canvas.width = templateImg.naturalWidth
+      canvas.height = templateImg.naturalHeight
       const ctx = canvas.getContext('2d')
-      const w = img.naturalWidth
-      const h = img.naturalHeight
+      const w = canvas.width
+      const h = canvas.height
+      ctx.drawImage(templateImg, 0, 0)
 
-      ctx.drawImage(img, 0, 0)
+      const finishDraw = () => {
+        ctx.textAlign = 'left'
+        ctx.fillStyle = '#1a237e'
+        ctx.font = `700 ${Math.round(w * 0.022)}px Poppins, sans-serif`
+        const xVal = Math.round(w * 0.369)
+        ctx.fillText(volunteerId,         xVal, Math.round(h * 0.570))
+        ctx.fillText(formData.name,       xVal, Math.round(h * 0.651))
+        ctx.fillText(joinDate,            xVal, Math.round(h * 0.733))
+        ctx.fillText('Member',            xVal, Math.round(h * 0.813))
+        ctx.fillText(formData.bloodGroup, xVal, Math.round(h * 0.895))
+        if (download) {
+          const link = document.createElement('a')
+          link.download = `BSF-MemberCard-${volunteerId}.jpeg`
+          link.href = canvas.toDataURL('image/jpeg', 0.95)
+          link.click()
+        }
+      }
 
-      ctx.textAlign = 'center'
-
-      // Volunteer name — below NAME label
-      ctx.fillStyle = '#1a237e'
-      ctx.font = `800 ${Math.round(w * 0.058)}px Poppins, sans-serif`
-      ctx.fillText(formData.name.toUpperCase(), w / 2, h * 0.464)
-
-      // Volunteer ID — below ID label
-      ctx.font = `700 ${Math.round(w * 0.040)}px Poppins, sans-serif`
-      ctx.fillText(volunteerId, w / 2, h * 0.629)
-
-      const link = document.createElement('a')
-      link.download = `BlueShadows-Volunteer-${volunteerId}.png`
-      link.href = canvas.toDataURL('image/png')
-      link.click()
+      if (photoPreview) {
+        const photoImg = new Image()
+        photoImg.onload = () => {
+          const boxX = Math.round(w * 0.728)
+          const boxY = Math.round(h * 0.058)
+          const boxW = Math.round(w * 0.236)
+          const boxH = Math.round(h * 0.439)
+          const r = Math.round(w * 0.015)
+          ctx.save()
+          ctx.beginPath()
+          ctx.moveTo(boxX + r, boxY)
+          ctx.lineTo(boxX + boxW - r, boxY)
+          ctx.arcTo(boxX + boxW, boxY, boxX + boxW, boxY + r, r)
+          ctx.lineTo(boxX + boxW, boxY + boxH - r)
+          ctx.arcTo(boxX + boxW, boxY + boxH, boxX + boxW - r, boxY + boxH, r)
+          ctx.lineTo(boxX + r, boxY + boxH)
+          ctx.arcTo(boxX, boxY + boxH, boxX, boxY + boxH - r, r)
+          ctx.lineTo(boxX, boxY + r)
+          ctx.arcTo(boxX, boxY, boxX + r, boxY, r)
+          ctx.closePath()
+          ctx.clip()
+          const scale = Math.max(boxW / photoImg.width, boxH / photoImg.height)
+          const dw = photoImg.width * scale
+          const dh = photoImg.height * scale
+          ctx.drawImage(photoImg, boxX + (boxW - dw) / 2, boxY + (boxH - dh) / 2, dw, dh)
+          ctx.restore()
+          finishDraw()
+        }
+        photoImg.src = photoPreview
+      } else {
+        finishDraw()
+      }
     }
-  }
+  }, [volunteerId, joinDate, formData.name, formData.bloodGroup, photoPreview])
+
+  const handleDownloadCard = useCallback(() => {
+    const canvas = document.createElement('canvas')
+    drawOnCanvas(canvas, true)
+  }, [drawOnCanvas])
+
+  useEffect(() => {
+    if (formStep !== 2 || !memberCardRef.current) return
+    drawOnCanvas(memberCardRef.current, false)
+  }, [formStep, drawOnCanvas])
 
   return (
     <div className="app">
       <Helmet>
-        <title>Volunteer | Blue Shadows Foundation</title>
-        <meta name="description" content="Volunteer with Blue Shadows Foundation and help bring care, education, and hope to underserved communities in rural Andhra Pradesh." />
-        <meta property="og:title" content="Volunteer With Blue Shadows Foundation" />
+        <title>Members | Blue Shadows Foundation</title>
+        <meta name="description" content="Become a member of Blue Shadows Foundation and help bring care, education, and hope to underserved communities in rural Andhra Pradesh." />
+        <meta property="og:title" content="Become a BSF Member | Blue Shadows Foundation" />
         <meta property="og:url" content="https://blueshadowsfoundation.org/#/volunteer" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
@@ -124,11 +181,46 @@ function Volunteer() {
       <section className="volunteer-hero">
         <div className="volunteer-hero-content">
           <span className="volunteer-badge">Join Our Mission</span>
-          <h1>Volunteer With Us</h1>
+          <h1>Become a Member</h1>
           <p>Be the change you want to see. Join Blue Shadows Foundation and help us bring light to those living in the shadows.</p>
           <button className="volunteer-cta-btn" onClick={() => setShowForm(true)}>
             <span className="btn-icon">🤝</span>
-            Volunteer With Us
+            Join as a Member
+          </button>
+        </div>
+      </section>
+
+      {/* Download E-Card Info Section */}
+      <section className="vol-ecard-info-section">
+        <div className="container">
+          <span className="vol-ecard-info-badge">Official Member Card</span>
+          <h2 className="vol-ecard-info-title">Download Your E-Card</h2>
+          <p className="vol-ecard-info-sub">
+            Every member receives an official BSF Member Card — personalized with your photo and details.
+            Register and download it instantly.
+          </p>
+          <div className="vol-how-it-works">
+            <h3 className="vol-how-title">How it Works</h3>
+            <div className="vol-steps">
+              <div className="vol-step">
+                <span className="vol-step-icon">📋</span>
+                <h4>1. Fill the Form</h4>
+                <p>Complete the member registration with your name, phone, address, and blood group</p>
+              </div>
+              <div className="vol-step">
+                <span className="vol-step-icon">📸</span>
+                <h4>2. Upload Your Photo</h4>
+                <p>Upload a clear face photo — it appears on your official BSF Member Card</p>
+              </div>
+              <div className="vol-step">
+                <span className="vol-step-icon">⬇️</span>
+                <h4>3. Download E-Card</h4>
+                <p>Your personalized BSF Member Card is ready to save and share instantly</p>
+              </div>
+            </div>
+          </div>
+          <button className="vol-ecard-register-btn" onClick={() => setShowForm(true)}>
+            Register &amp; Get Your Member Card
           </button>
         </div>
       </section>
@@ -136,8 +228,8 @@ function Volunteer() {
       {/* Why Volunteer */}
       <section className="volunteer-why">
         <div className="container">
-          <h2 className="section-title">Why Volunteer?</h2>
-          <p className="volunteer-intro">Volunteering is more than giving your time — it's about making a lasting impact on the lives of people who need it most.</p>
+          <h2 className="section-title">Why Become a Member?</h2>
+          <p className="volunteer-intro">Becoming a member is more than giving your time — it's about making a lasting impact on the lives of people who need it most.</p>
           <div className="volunteer-reasons-grid">
             <div className="volunteer-reason-card">
               <div className="reason-icon">🏥</div>
@@ -161,15 +253,14 @@ function Volunteer() {
             </div>
           </div>
 
-          {/* CTA Section */}
           <div className="volunteer-cta-section">
             <div className="volunteer-cta-card">
               <div className="cta-card-content">
                 <h3>Ready to Make a Difference?</h3>
-                <p>Join our growing community of changemakers. Register today and start your volunteering journey with Blue Shadows Foundation.</p>
+                <p>Join our growing community of changemakers. Register today and start your journey with Blue Shadows Foundation.</p>
                 <button className="volunteer-cta-btn secondary" onClick={() => setShowForm(true)}>
                   <span className="btn-icon">✋</span>
-                  Register as a Volunteer
+                  Register as a Member
                 </button>
               </div>
             </div>
@@ -181,7 +272,7 @@ function Volunteer() {
       <section className="volunteer-contact">
         <div className="container">
           <h2 className="section-title">Get In Touch</h2>
-          <p className="volunteer-contact-intro">Ready to make a difference? Reach out to us through any of the channels below and we'll get you started on your volunteering journey.</p>
+          <p className="volunteer-contact-intro">Ready to make a difference? Reach out to us through any of the channels below and we'll get you started on your journey as a member.</p>
 
           <div className="volunteer-contact-grid">
             <div className="volunteer-contact-card">
@@ -252,12 +343,13 @@ function Volunteer() {
                   <img src="logo.jpg" alt="Blue Shadows Foundation" />
                 </div>
                 <div className="vol-form-header">
-                  <span className="vol-form-badge">Volunteer Registration</span>
+                  <span className="vol-form-badge">Member Registration</span>
                   <h2>Join Blue Shadows</h2>
                   <p>Fill in your details below and become part of our mission to uplift communities.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="vol-form">
+                  {/* Full Name */}
                   <div className="vol-form-group">
                     <label className="vol-form-label" htmlFor="vol-name">
                       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -279,6 +371,7 @@ function Volunteer() {
                     {errors.name && <span className="vol-error">{errors.name}</span>}
                   </div>
 
+                  {/* Phone */}
                   <div className="vol-form-group">
                     <label className="vol-form-label" htmlFor="vol-phone">
                       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -300,6 +393,7 @@ function Volunteer() {
                     {errors.phone && <span className="vol-error">{errors.phone}</span>}
                   </div>
 
+                  {/* Address */}
                   <div className="vol-form-group">
                     <label className="vol-form-label" htmlFor="vol-address">
                       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -321,6 +415,65 @@ function Volunteer() {
                     {errors.address && <span className="vol-error">{errors.address}</span>}
                   </div>
 
+                  {/* Blood Group */}
+                  <div className="vol-form-group">
+                    <label className="vol-form-label" htmlFor="vol-blood">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 2C6 2 4 8 4 12a8 8 0 0 0 16 0c0-4-2-10-8-10z" />
+                      </svg>
+                      Blood Group <span className="required">*</span>
+                    </label>
+                    <select
+                      id="vol-blood"
+                      name="bloodGroup"
+                      value={formData.bloodGroup}
+                      onChange={handleChange}
+                      className={`vol-form-input vol-blood-select ${errors.bloodGroup ? 'error' : ''}`}
+                    >
+                      <option value="">Select your blood group</option>
+                      {['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].map(g => (
+                        <option key={g} value={g}>{g}</option>
+                      ))}
+                    </select>
+                    {errors.bloodGroup && <span className="vol-error">{errors.bloodGroup}</span>}
+                  </div>
+
+                  {/* Photo Upload */}
+                  <div className="vol-form-group">
+                    <label className="vol-form-label">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                        <circle cx="12" cy="13" r="4" />
+                      </svg>
+                      Your Photo <span className="required">*</span>
+                    </label>
+                    <label
+                      className={`vol-photo-upload-wrap ${errors.photo ? 'error-border' : ''}`}
+                      htmlFor="vol-photo-input"
+                    >
+                      {photoPreview ? (
+                        <div className="vol-photo-preview-wrap">
+                          <img src={photoPreview} alt="Preview" className="vol-photo-preview" />
+                          <span className="vol-photo-change-text">Tap to change photo</span>
+                        </div>
+                      ) : (
+                        <div className="vol-photo-placeholder">
+                          <span className="vol-photo-icon">📸</span>
+                          <span className="vol-photo-text">Tap to upload your photo</span>
+                          <span className="vol-photo-hint">JPG or PNG — clear face photo</span>
+                        </div>
+                      )}
+                    </label>
+                    <input
+                      type="file"
+                      id="vol-photo-input"
+                      accept="image/*"
+                      onChange={handlePhotoChange}
+                      style={{ display: 'none' }}
+                    />
+                    {errors.photo && <span className="vol-error">{errors.photo}</span>}
+                  </div>
+
                   <button type="submit" className="vol-submit-btn" disabled={submitting}>
                     {submitting ? (
                       <><span className="vol-spinner"></span>Submitting...</>
@@ -336,7 +489,7 @@ function Volunteer() {
                 </form>
 
                 <p className="vol-form-footer">
-                  By submitting, you agree to be contacted by Blue Shadows Foundation regarding volunteer opportunities.
+                  By submitting, you agree to be contacted by Blue Shadows Foundation regarding membership opportunities.
                 </p>
               </div>
             )}
@@ -349,18 +502,13 @@ function Volunteer() {
                     <path d="M35 60 L52 77 L85 44" fill="none" stroke="#38a169" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" className="vol-checkmark-path" />
                   </svg>
                 </div>
-                <h2 className="vol-success-title">Welcome, {formData.name}! 🎉</h2>
-                <p className="vol-success-msg">Your volunteer registration is confirmed. Here is your official e-card!</p>
+                <h2 className="vol-success-title">Welcome, {formData.name}!</h2>
+                <p className="vol-success-msg">Your registration is confirmed. Here is your official BSF Member Card!</p>
 
-                {/* E-Card Preview */}
-                <div className="vol-ecard-preview" ref={eCardRef}>
-                  <img src="id-card-template.png" alt="Volunteer ID Card" className="vol-ecard-template-img" />
-                  <div className="vol-ecard-overlay-name">{formData.name.toUpperCase()}</div>
-                  <div className="vol-ecard-overlay-id">{volunteerId}</div>
-                </div>
+                <canvas ref={memberCardRef} className="vol-member-card-canvas" />
 
                 <button className="vol-download-btn" onClick={handleDownloadCard}>
-                  ⬇ Download E-Card
+                  ⬇ Download Member Card
                 </button>
                 <button className="vol-done-btn" onClick={handleCloseForm}>Done ✓</button>
               </div>

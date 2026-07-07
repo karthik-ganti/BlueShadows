@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { Helmet } from 'react-helmet-async'
 import ReactCrop, { centerCrop, makeAspectCrop, convertToPixelCrop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
@@ -549,8 +550,8 @@ function Volunteer() {
         </div>
       )}
 
-      {/* Photo Crop Modal */}
-      {cropModalOpen && (
+      {/* Photo Crop Modal — rendered in document.body via portal to escape modal stacking context */}
+      {cropModalOpen && createPortal(
         <div className="crop-overlay" onClick={() => setCropModalOpen(false)}>
           <div className="crop-modal" onClick={e => e.stopPropagation()}>
             <div className="crop-modal-header">
@@ -580,7 +581,8 @@ function Volunteer() {
               <button className="crop-confirm-btn" onClick={handleCropConfirm}>Use This Photo ✓</button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )

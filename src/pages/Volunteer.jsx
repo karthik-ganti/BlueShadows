@@ -23,6 +23,9 @@ function Volunteer() {
   const [crop, setCrop] = useState()
   const [completedCrop, setCompletedCrop] = useState(null)
   const [cropModalOpen, setCropModalOpen] = useState(false)
+  const [savedMember, setSavedMember] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('bsf_member')) } catch { return null }
+  })
 
   useEffect(() => {
     document.body.style.overflow = (showForm || cropModalOpen) ? 'hidden' : ''
@@ -119,6 +122,20 @@ function Volunteer() {
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: payload
       })
+      const record = { name: formData.name.trim(), bloodGroup: formData.bloodGroup, volunteerId: id, joinDate: date }
+      localStorage.setItem('bsf_member', JSON.stringify(record))
+      setSavedMember(record)
+      // Save compressed photo thumbnail for re-download
+      if (photoPreview) {
+        const img = new Image()
+        img.onload = () => {
+          const tc = document.createElement('canvas')
+          tc.width = 200; tc.height = 252
+          tc.getContext('2d').drawImage(img, 0, 0, 200, 252)
+          try { localStorage.setItem('bsf_member_photo', tc.toDataURL('image/jpeg', 0.55)) } catch (_) {}
+        }
+        img.src = photoPreview
+      }
       setFormStep(2)
     } catch (err) {
       console.log('Volunteer submission error:', err)
@@ -207,6 +224,65 @@ function Volunteer() {
     drawOnCanvas(canvas, true)
   }, [drawOnCanvas])
 
+  const handleRedownload = useCallback(() => {
+    if (!savedMember) return
+    const savedPhoto = localStorage.getItem('bsf_member_photo')
+    const canvas = document.createElement('canvas')
+    const templateImg = new Image()
+    templateImg.src = 'member-card.jpeg'
+    templateImg.onload = () => {
+      canvas.width = templateImg.naturalWidth
+      canvas.height = templateImg.naturalHeight
+      const ctx = canvas.getContext('2d')
+      const w = canvas.width, h = canvas.height
+      ctx.drawImage(templateImg, 0, 0)
+      const finish = () => {
+        ctx.textAlign = 'left'
+        ctx.fillStyle = '#000000'
+        ctx.font = `700 ${Math.round(h * 0.030)}px Poppins, sans-serif`
+        const xVal = Math.round(w * 0.405)
+        ctx.fillText(savedMember.volunteerId, xVal, Math.round(h * 0.527))
+        ctx.fillText(savedMember.name,        xVal, Math.round(h * 0.608))
+        ctx.fillText(savedMember.joinDate,    xVal, Math.round(h * 0.686))
+        ctx.fillText('General Member',        xVal, Math.round(h * 0.764))
+        ctx.fillText(savedMember.bloodGroup,  xVal, Math.round(h * 0.843))
+        const link = document.createElement('a')
+        link.download = `BSF-MemberCard-${savedMember.volunteerId}.jpeg`
+        link.href = canvas.toDataURL('image/jpeg', 0.95)
+        link.click()
+      }
+      if (savedPhoto) {
+        const photoImg = new Image()
+        photoImg.onload = () => {
+          const boxX = Math.round(w * 0.756), boxY = Math.round(h * 0.063)
+          const boxW = Math.round(w * 0.186), boxH = Math.round(h * 0.352)
+          const r = Math.round(w * 0.013)
+          ctx.save()
+          ctx.beginPath()
+          ctx.moveTo(boxX + r, boxY)
+          ctx.lineTo(boxX + boxW - r, boxY)
+          ctx.arcTo(boxX + boxW, boxY, boxX + boxW, boxY + r, r)
+          ctx.lineTo(boxX + boxW, boxY + boxH - r)
+          ctx.arcTo(boxX + boxW, boxY + boxH, boxX + boxW - r, boxY + boxH, r)
+          ctx.lineTo(boxX + r, boxY + boxH)
+          ctx.arcTo(boxX, boxY + boxH, boxX, boxY + boxH - r, r)
+          ctx.lineTo(boxX, boxY + r)
+          ctx.arcTo(boxX, boxY, boxX + r, boxY, r)
+          ctx.closePath()
+          ctx.clip()
+          const scale = Math.max(boxW / photoImg.width, boxH / photoImg.height)
+          const dw = photoImg.width * scale, dh = photoImg.height * scale
+          ctx.drawImage(photoImg, boxX + (boxW - dw) / 2, boxY + (boxH - dh) / 2, dw, dh)
+          ctx.restore()
+          finish()
+        }
+        photoImg.src = savedPhoto
+      } else {
+        finish()
+      }
+    }
+  }, [savedMember])
+
   useEffect(() => {
     if (formStep !== 2 || !memberCardRef.current) return
     drawOnCanvas(memberCardRef.current, false)
@@ -257,6 +333,34 @@ function Volunteer() {
           </button>
         </div>
       </section>
+
+      {/* Already a Member */}
+      {savedMember && (
+        <section className="vol-returning-section">
+          <div className="container">
+            <div className="vol-returning-card">
+              <div className="vol-returning-top">
+                <span className="vol-returning-badge">👋 Welcome Back</span>
+                <h3 className="vol-returning-name">{savedMember.name}</h3>
+                <p className="vol-returning-id">Member ID: <strong>{savedMember.volunteerId}</strong> &nbsp;·&nbsp; Joined: {savedMember.joinDate}</p>
+              </div>
+              <div className="vol-returning-actions">
+                <button className="vol-redownload-btn" onClick={handleRedownload}>
+                  ⬇&nbsp; Re-download Your Card
+                </button>
+                <a
+                  className="vol-correct-btn"
+                  href={`https://wa.me/917828323456?text=${encodeURIComponent(`Hi BSF Team,\n\nI need to correct my member details.\n\nMember ID: ${savedMember.volunteerId}\nRegistered Name: ${savedMember.name}\n\nPlease help me update my information.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  ✏️&nbsp; Correct My Details
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Why Volunteer */}
       <section className="volunteer-why">

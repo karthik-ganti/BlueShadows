@@ -5147,6 +5147,121 @@ a.contact-card-link:hover {
 }
 
 /* ===================================================================
+   RETURNING MEMBER SECTION
+=================================================================== */
+.vol-returning-section {
+  background: #f0f5ff;
+  padding: 40px 0;
+}
+
+.vol-returning-card {
+  background: #fff;
+  border-radius: 20px;
+  border: 2px solid #c7d7f8;
+  padding: 32px 36px;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 24px rgba(26,35,126,0.08);
+}
+
+.vol-returning-top {
+  flex: 1;
+  min-width: 200px;
+}
+
+.vol-returning-badge {
+  display: inline-block;
+  background: #e8f0fe;
+  color: #1a237e;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.vol-returning-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin: 0 0 6px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.vol-returning-id {
+  font-size: 0.85rem;
+  color: #4a5568;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.vol-returning-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.vol-redownload-btn {
+  background: linear-gradient(135deg, #1a237e, #2c5282);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+
+.vol-redownload-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.vol-correct-btn {
+  background: none;
+  border: 2px solid #25d366;
+  color: #1a7a3a;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.vol-correct-btn:hover {
+  background: #e6fff0;
+}
+
+@media (max-width: 600px) {
+  .vol-returning-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+  }
+  .vol-returning-actions {
+    width: 100%;
+  }
+  .vol-redownload-btn,
+  .vol-correct-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ===================================================================
    PHOTO CROP MODAL
 =================================================================== */
 .crop-overlay {

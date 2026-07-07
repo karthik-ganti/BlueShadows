@@ -185,7 +185,7 @@ function Home() {
             <p>Blue Shadows Foundation is dedicated to improving lives through free medical camps, education for the underprivileged, social service, and community empowerment.</p>
             <div className="hero-buttons">
               <a href="#/donate" className="cta-button">Donate Now</a>
-              <a href="#/volunteer" className="cta-button secondary">Download Your E-Card</a>
+              <a href="#/member" className="cta-button secondary">Download Your E-Card</a>
             </div>
           </div>
           <div className="hero-logo-animation">
@@ -417,7 +417,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/founders" element={<Founders />} />
         <Route path="/donate" element={<Donate />} />
-        <Route path="/volunteer" element={<Volunteer />} />
+        <Route path="/member" element={<Volunteer />} />
         <Route path="/campaign" element={<Campaign />} />
         <Route path="/team" element={<TeamForm />} />
       </Routes>

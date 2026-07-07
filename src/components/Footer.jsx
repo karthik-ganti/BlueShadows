@@ -15,7 +15,7 @@ function Footer() {
           <ul>
             <li><Link to="/founders">Founders</Link></li>
             <li><a href="/#services">Our Services</a></li>
-            <li><Link to="/volunteer">Volunteer</Link></li>
+            <li><Link to="/member">Member</Link></li>
             <li><Link to="/donate">Donate</Link></li>
           </ul>
         </div>

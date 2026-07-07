@@ -36,7 +36,7 @@ function Navbar() {
             <a href="#gallery" onClick={(e) => { e.preventDefault(); handleSectionNav('gallery') }}>Gallery</a>
           </li>
           <li><Link to="/founders" onClick={() => setMenuOpen(false)}>Founders</Link></li>
-          <li><Link to="/volunteer" onClick={() => setMenuOpen(false)}>Volunteer</Link></li>
+          <li><Link to="/member" onClick={() => setMenuOpen(false)}>Member</Link></li>
           <li><Link to="/campaign" className="nav-campaign-link" onClick={() => setMenuOpen(false)}>🏠 Campaign</Link></li>
           <li><Link to="/donate" onClick={() => setMenuOpen(false)}>Donate</Link></li>
         </ul>

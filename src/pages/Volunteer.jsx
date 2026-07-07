@@ -102,6 +102,18 @@ function Volunteer() {
     setCropModalOpen(false)
   }
 
+  const makeThumbnail = (dataUrl) => new Promise((resolve) => {
+    const img = new Image()
+    img.onload = () => {
+      const tc = document.createElement('canvas')
+      tc.width = 240; tc.height = 302
+      tc.getContext('2d').drawImage(img, 0, 0, 240, 302)
+      resolve(tc.toDataURL('image/jpeg', 0.6))
+    }
+    img.onerror = () => resolve(null)
+    img.src = dataUrl
+  })
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!validate()) return
@@ -113,6 +125,9 @@ function Volunteer() {
       setVolunteerId(id)
       setJoinDate(date)
 
+      // Create compressed thumbnail to send to Drive via Apps Script
+      const photoThumb = photoPreview ? await makeThumbnail(photoPreview) : null
+
       const payload = JSON.stringify({
         name: formData.name.trim(),
         phone: formData.phone.trim(),
@@ -120,7 +135,8 @@ function Volunteer() {
         volunteerId: id,
         bloodGroup: formData.bloodGroup,
         joinDate: date,
-        timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+        timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+        photo: photoThumb
       })
       await fetch(VOLUNTEER_SHEET_URL, {
         method: 'POST',
@@ -128,19 +144,13 @@ function Volunteer() {
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: payload
       })
+
       const record = { name: formData.name.trim(), bloodGroup: formData.bloodGroup, volunteerId: id, joinDate: date }
       localStorage.setItem('bsf_member', JSON.stringify(record))
       setSavedMember(record)
-      // Save compressed photo thumbnail for re-download
-      if (photoPreview) {
-        const img = new Image()
-        img.onload = () => {
-          const tc = document.createElement('canvas')
-          tc.width = 200; tc.height = 252
-          tc.getContext('2d').drawImage(img, 0, 0, 200, 252)
-          try { localStorage.setItem('bsf_member_photo', tc.toDataURL('image/jpeg', 0.55)) } catch (_) {}
-        }
-        img.src = photoPreview
+      // Also cache thumbnail locally for same-device fast re-download
+      if (photoThumb) {
+        try { localStorage.setItem('bsf_member_photo', photoThumb) } catch (_) {}
       }
       setFormStep(2)
     } catch (err) {
@@ -337,7 +347,35 @@ function Volunteer() {
         link.href = canvas.toDataURL('image/jpeg', 0.95)
         link.click()
       }
-      finish()
+      if (member.photoUrl) {
+        const photoImg = new Image()
+        photoImg.crossOrigin = 'anonymous'
+        photoImg.onload = () => {
+          const boxX = Math.round(w * 0.756), boxY = Math.round(h * 0.063)
+          const boxW = Math.round(w * 0.186), boxH = Math.round(h * 0.352)
+          const r = Math.round(w * 0.013)
+          ctx.save()
+          ctx.beginPath()
+          ctx.moveTo(boxX + r, boxY); ctx.lineTo(boxX + boxW - r, boxY)
+          ctx.arcTo(boxX + boxW, boxY, boxX + boxW, boxY + r, r)
+          ctx.lineTo(boxX + boxW, boxY + boxH - r)
+          ctx.arcTo(boxX + boxW, boxY + boxH, boxX + boxW - r, boxY + boxH, r)
+          ctx.lineTo(boxX + r, boxY + boxH)
+          ctx.arcTo(boxX, boxY + boxH, boxX, boxY + boxH - r, r)
+          ctx.lineTo(boxX, boxY + r)
+          ctx.arcTo(boxX, boxY, boxX + r, boxY, r)
+          ctx.closePath(); ctx.clip()
+          const scale = Math.max(boxW / photoImg.width, boxH / photoImg.height)
+          const dw = photoImg.width * scale, dh = photoImg.height * scale
+          ctx.drawImage(photoImg, boxX + (boxW - dw) / 2, boxY + (boxH - dh) / 2, dw, dh)
+          ctx.restore()
+          finish()
+        }
+        photoImg.onerror = () => finish() // fall back to no photo if Drive load fails
+        photoImg.src = member.photoUrl
+      } else {
+        finish()
+      }
     }
   }, [])
 

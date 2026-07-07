@@ -26,6 +26,10 @@ function Volunteer() {
   const [savedMember, setSavedMember] = useState(() => {
     try { return JSON.parse(localStorage.getItem('bsf_member')) } catch { return null }
   })
+  const [findPhone, setFindPhone] = useState('')
+  const [findLoading, setFindLoading] = useState(false)
+  const [findResult, setFindResult] = useState(null)
+  const [findError, setFindError] = useState('')
 
   useEffect(() => {
     document.body.style.overflow = (showForm || cropModalOpen) ? 'hidden' : ''
@@ -114,6 +118,8 @@ function Volunteer() {
         phone: formData.phone.trim(),
         address: formData.address.trim(),
         volunteerId: id,
+        bloodGroup: formData.bloodGroup,
+        joinDate: date,
         timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
       })
       await fetch(VOLUNTEER_SHEET_URL, {
@@ -283,6 +289,58 @@ function Volunteer() {
     }
   }, [savedMember])
 
+  const handleFindMember = async () => {
+    const phone = findPhone.trim()
+    if (!/^[0-9]{10}$/.test(phone)) {
+      setFindError('Please enter a valid 10-digit phone number.')
+      return
+    }
+    setFindLoading(true)
+    setFindError('')
+    setFindResult(null)
+    try {
+      const res = await fetch(`${VOLUNTEER_SHEET_URL}?phone=${phone}`)
+      const data = await res.json()
+      if (data.success && data.member) {
+        setFindResult(data.member)
+      } else {
+        setFindError('No member found with this phone number. Please check and try again.')
+      }
+    } catch {
+      setFindError('Unable to connect. Please try again.')
+    }
+    setFindLoading(false)
+  }
+
+  const handleRedownloadFound = useCallback((member) => {
+    const canvas = document.createElement('canvas')
+    const templateImg = new Image()
+    templateImg.src = 'member-card.jpeg'
+    templateImg.onload = () => {
+      canvas.width = templateImg.naturalWidth
+      canvas.height = templateImg.naturalHeight
+      const ctx = canvas.getContext('2d')
+      const w = canvas.width, h = canvas.height
+      ctx.drawImage(templateImg, 0, 0)
+      const finish = () => {
+        ctx.textAlign = 'left'
+        ctx.fillStyle = '#000000'
+        ctx.font = `700 ${Math.round(h * 0.030)}px Poppins, sans-serif`
+        const xVal = Math.round(w * 0.405)
+        ctx.fillText(member.volunteerId, xVal, Math.round(h * 0.527))
+        ctx.fillText(member.name,        xVal, Math.round(h * 0.608))
+        ctx.fillText(member.joinDate,    xVal, Math.round(h * 0.686))
+        ctx.fillText('General Member',   xVal, Math.round(h * 0.764))
+        ctx.fillText(member.bloodGroup,  xVal, Math.round(h * 0.843))
+        const link = document.createElement('a')
+        link.download = `BSF-MemberCard-${member.volunteerId}.jpeg`
+        link.href = canvas.toDataURL('image/jpeg', 0.95)
+        link.click()
+      }
+      finish()
+    }
+  }, [])
+
   useEffect(() => {
     if (formStep !== 2 || !memberCardRef.current) return
     drawOnCanvas(memberCardRef.current, false)
@@ -361,6 +419,45 @@ function Volunteer() {
           </div>
         </section>
       )}
+
+      {/* Find Your Card */}
+      <section className="vol-find-section">
+        <div className="container">
+          <div className="vol-find-card">
+            <div className="vol-find-header">
+              <span className="vol-find-badge">🔍 Member Lookup</span>
+              <h3 className="vol-find-title">Find Your Member Card</h3>
+              <p className="vol-find-sub">Enter your registered phone number to retrieve and re-download your card on any device.</p>
+            </div>
+            <div className="vol-find-form">
+              <input
+                type="tel"
+                className="vol-find-input"
+                placeholder="Enter your 10-digit phone number"
+                value={findPhone}
+                maxLength={10}
+                onChange={e => { setFindPhone(e.target.value); setFindError(''); setFindResult(null) }}
+                onKeyDown={e => e.key === 'Enter' && handleFindMember()}
+              />
+              <button className="vol-find-btn" onClick={handleFindMember} disabled={findLoading}>
+                {findLoading ? <span className="vol-spinner" /> : '🔍 Find'}
+              </button>
+            </div>
+            {findError && <p className="vol-find-error">{findError}</p>}
+            {findResult && (
+              <div className="vol-find-result">
+                <div className="vol-find-result-info">
+                  <span className="vol-find-result-name">{findResult.name}</span>
+                  <span className="vol-find-result-meta">{findResult.volunteerId} &nbsp;·&nbsp; {findResult.joinDate}</span>
+                </div>
+                <button className="vol-redownload-btn" onClick={() => handleRedownloadFound(findResult)}>
+                  ⬇&nbsp; Download Card
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
 
       {/* Why Volunteer */}
       <section className="volunteer-why">

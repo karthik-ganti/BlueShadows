@@ -5262,6 +5262,146 @@ a.contact-card-link:hover {
 }
 
 /* ===================================================================
+   FIND YOUR CARD SECTION
+=================================================================== */
+.vol-find-section {
+  background: #fff;
+  padding: 40px 0;
+  border-top: 1px solid #e8ecf4;
+}
+
+.vol-find-card {
+  background: #f8faff;
+  border: 2px solid #c7d7f8;
+  border-radius: 20px;
+  padding: 36px 40px;
+  max-width: 640px;
+  margin: 0 auto;
+  box-shadow: 0 4px 24px rgba(26,35,126,0.07);
+}
+
+.vol-find-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.vol-find-badge {
+  display: inline-block;
+  background: #e8f0fe;
+  color: #1a237e;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.vol-find-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin: 0 0 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.vol-find-sub {
+  font-size: 0.85rem;
+  color: #718096;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.vol-find-form {
+  display: flex;
+  gap: 10px;
+}
+
+.vol-find-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1.5px solid #c7d7f8;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.vol-find-input:focus {
+  border-color: #1a237e;
+}
+
+.vol-find-btn {
+  background: linear-gradient(135deg, #1a237e, #2c5282);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  min-width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vol-find-btn:hover:not(:disabled) { opacity: 0.88; }
+.vol-find-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.vol-find-error {
+  color: #c53030;
+  font-size: 0.83rem;
+  margin: 10px 0 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.vol-find-result {
+  margin-top: 18px;
+  background: #fff;
+  border: 1.5px solid #c6f6d5;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.vol-find-result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vol-find-result-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #1a237e;
+  font-family: 'Poppins', sans-serif;
+}
+
+.vol-find-result-meta {
+  font-size: 0.8rem;
+  color: #4a5568;
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width: 600px) {
+  .vol-find-card { padding: 24px 18px; }
+  .vol-find-form { flex-direction: column; }
+  .vol-find-btn { width: 100%; }
+  .vol-find-result { flex-direction: column; align-items: flex-start; }
+  .vol-find-result .vol-redownload-btn { width: 100%; text-align: center; }
+}
+
+/* ===================================================================
    PHOTO CROP MODAL
 =================================================================== */
 .crop-overlay {

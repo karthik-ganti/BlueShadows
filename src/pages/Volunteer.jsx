@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Helmet } from 'react-helmet-async'
+import ReactCrop, { centerCrop, makeAspectCrop, convertToPixelCrop } from 'react-image-crop'
+import 'react-image-crop/dist/ReactCrop.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
@@ -15,9 +17,14 @@ function Volunteer() {
   const [volunteerId, setVolunteerId] = useState('')
   const [joinDate, setJoinDate] = useState('')
   const memberCardRef = useRef(null)
+  const cropImgRef = useRef(null)
+  const [cropSrc, setCropSrc] = useState(null)
+  const [crop, setCrop] = useState()
+  const [completedCrop, setCompletedCrop] = useState(null)
+  const [cropModalOpen, setCropModalOpen] = useState(false)
 
   useEffect(() => {
-    document.body.style.overflow = showForm ? 'hidden' : ''
+    document.body.style.overflow = (showForm || cropModalOpen) ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [showForm])
 
@@ -42,10 +49,47 @@ function Volunteer() {
   const handlePhotoChange = (e) => {
     const file = e.target.files[0]
     if (!file) return
-    setFormData(prev => ({ ...prev, photo: file }))
     const reader = new FileReader()
-    reader.onload = (ev) => setPhotoPreview(ev.target.result)
+    reader.onload = (ev) => {
+      setCropSrc(ev.target.result)
+      setCrop(undefined)
+      setCompletedCrop(null)
+      setCropModalOpen(true)
+    }
     reader.readAsDataURL(file)
+  }
+
+  const onCropImageLoad = (e) => {
+    const { width, height } = e.currentTarget
+    const pct = centerCrop(
+      makeAspectCrop({ unit: '%', width: 90 }, 286 / 361, width, height),
+      width, height
+    )
+    setCrop(pct)
+    setCompletedCrop(convertToPixelCrop(pct, width, height))
+  }
+
+  const handleCropConfirm = () => {
+    if (!completedCrop || !cropImgRef.current) return
+    const img = cropImgRef.current
+    const scaleX = img.naturalWidth / img.width
+    const scaleY = img.naturalHeight / img.height
+    const canvas = document.createElement('canvas')
+    canvas.width = Math.round(completedCrop.width * scaleX)
+    canvas.height = Math.round(completedCrop.height * scaleY)
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(
+      img,
+      Math.round(completedCrop.x * scaleX),
+      Math.round(completedCrop.y * scaleY),
+      Math.round(completedCrop.width * scaleX),
+      Math.round(completedCrop.height * scaleY),
+      0, 0, canvas.width, canvas.height
+    )
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.92)
+    setPhotoPreview(dataUrl)
+    setFormData(prev => ({ ...prev, photo: dataUrl }))
+    setCropModalOpen(false)
     if (errors.photo) setErrors(prev => ({ ...prev, photo: '' }))
   }
 
@@ -500,6 +544,40 @@ function Volunteer() {
                 <button className="vol-done-btn" onClick={handleCloseForm}>Done ✓</button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Photo Crop Modal */}
+      {cropModalOpen && (
+        <div className="crop-overlay" onClick={() => setCropModalOpen(false)}>
+          <div className="crop-modal" onClick={e => e.stopPropagation()}>
+            <div className="crop-modal-header">
+              <h3>Adjust Your Photo</h3>
+              <p>Drag to reposition · Pinch or scroll to zoom</p>
+            </div>
+            <div className="crop-modal-body">
+              <ReactCrop
+                crop={crop}
+                onChange={c => setCrop(c)}
+                onComplete={c => setCompletedCrop(c)}
+                aspect={286 / 361}
+                minWidth={40}
+                ruleOfThirds
+              >
+                <img
+                  ref={cropImgRef}
+                  src={cropSrc}
+                  alt="Crop"
+                  onLoad={onCropImageLoad}
+                  style={{ maxHeight: '58vh', maxWidth: '100%', display: 'block' }}
+                />
+              </ReactCrop>
+            </div>
+            <div className="crop-modal-actions">
+              <button className="crop-cancel-btn" onClick={() => setCropModalOpen(false)}>Cancel</button>
+              <button className="crop-confirm-btn" onClick={handleCropConfirm}>Use This Photo ✓</button>
+            </div>
           </div>
         </div>
       )}

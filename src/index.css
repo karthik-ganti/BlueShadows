@@ -5147,6 +5147,115 @@ a.contact-card-link:hover {
 }
 
 /* ===================================================================
+   PHOTO CROP MODAL
+=================================================================== */
+.crop-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.crop-modal {
+  background: #fff;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 500px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.crop-modal-header {
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid #e8ecf4;
+}
+
+.crop-modal-header h3 {
+  margin: 0 0 3px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a237e;
+  font-family: 'Poppins', sans-serif;
+}
+
+.crop-modal-header p {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #718096;
+  font-family: 'Poppins', sans-serif;
+}
+
+.crop-modal-body {
+  background: #111827;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 180px;
+  padding: 12px;
+}
+
+.crop-modal-actions {
+  display: flex;
+  gap: 10px;
+  padding: 14px 20px;
+  justify-content: flex-end;
+  border-top: 1px solid #e8ecf4;
+}
+
+.crop-cancel-btn {
+  background: none;
+  border: 1.5px solid #cbd5e0;
+  color: #4a5568;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.2s;
+}
+
+.crop-cancel-btn:hover {
+  border-color: #a0aec0;
+  background: #f7fafc;
+}
+
+.crop-confirm-btn {
+  background: linear-gradient(135deg, #1a237e, #2c5282);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.2s;
+}
+
+.crop-confirm-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .crop-modal-actions {
+    flex-direction: column-reverse;
+  }
+  .crop-confirm-btn,
+  .crop-cancel-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ===================================================================
    PREMIUM DONATION PAGE — Dark Glass Redesign
    Pure CSS overrides — zero JSX changes
 =================================================================== */

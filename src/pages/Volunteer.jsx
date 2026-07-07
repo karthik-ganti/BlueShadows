@@ -70,27 +70,28 @@ function Volunteer() {
   }
 
   const handleCropConfirm = () => {
-    if (!completedCrop || !cropImgRef.current) return
     const img = cropImgRef.current
+    if (!img) return
     const scaleX = img.naturalWidth / img.width
     const scaleY = img.naturalHeight / img.height
+    const c = completedCrop || { x: 0, y: 0, width: img.width, height: img.height, unit: 'px' }
     const canvas = document.createElement('canvas')
-    canvas.width = Math.round(completedCrop.width * scaleX)
-    canvas.height = Math.round(completedCrop.height * scaleY)
+    canvas.width = Math.round(c.width * scaleX)
+    canvas.height = Math.round(c.height * scaleY)
     const ctx = canvas.getContext('2d')
     ctx.drawImage(
       img,
-      Math.round(completedCrop.x * scaleX),
-      Math.round(completedCrop.y * scaleY),
-      Math.round(completedCrop.width * scaleX),
-      Math.round(completedCrop.height * scaleY),
+      Math.round(c.x * scaleX),
+      Math.round(c.y * scaleY),
+      Math.round(c.width * scaleX),
+      Math.round(c.height * scaleY),
       0, 0, canvas.width, canvas.height
     )
     const dataUrl = canvas.toDataURL('image/jpeg', 0.92)
     setPhotoPreview(dataUrl)
     setFormData(prev => ({ ...prev, photo: dataUrl }))
+    setErrors(prev => ({ ...prev, photo: '' }))
     setCropModalOpen(false)
-    if (errors.photo) setErrors(prev => ({ ...prev, photo: '' }))
   }
 
   const handleSubmit = async (e) => {

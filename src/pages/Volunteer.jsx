@@ -177,19 +177,6 @@ function Volunteer() {
       </Helmet>
       <Navbar />
 
-      {/* Volunteer Hero */}
-      <section className="volunteer-hero">
-        <div className="volunteer-hero-content">
-          <span className="volunteer-badge">Join Our Mission</span>
-          <h1>Become a Member</h1>
-          <p>Be the change you want to see. Join Blue Shadows Foundation and help us bring light to those living in the shadows.</p>
-          <button className="volunteer-cta-btn" onClick={() => setShowForm(true)}>
-            <span className="btn-icon">🤝</span>
-            Join as a Member
-          </button>
-        </div>
-      </section>
-
       {/* Download E-Card Info Section */}
       <section className="vol-ecard-info-section">
         <div className="container">
